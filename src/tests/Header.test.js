@@ -35,4 +35,38 @@ describe('atingir 45% de coverage', () => {
     expect(search).not.toBeInTheDocument();
   })
 
+  test('testa se o header utiliza o botao search', () => {
+    const { history } = renderWithRouter(<App />)
+    history.push('/foods')
+    
+    const search = screen.getByTestId('search-top-btn');
+
+    userEvent.click(search)
+
+    const searchInput = screen.getByTestId('search-input');
+    expect(searchInput).toBeInTheDocument()
+
+    userEvent.click(search)
+    
+    expect(searchInput).not.toBeInTheDocument();
+  })
+
+  test('testa se o header possui os intes na tela', () => {
+    const { history } = renderWithRouter(<App />)
+    
+    history.push('/drinks')
+    
+    const search = screen.getByText('Drinks');
+    expect(search).toBeInTheDocument();
+
+    history.push('/done-recipes')
+    
+    const done = screen.getByText('Done Recipes');
+    expect(done).toBeInTheDocument();
+
+    history.push('/favorite-recipes')
+    
+    const favorite = screen.getByText('Favorite Recipes');
+    expect(favorite).toBeInTheDocument();
+  })
 })
