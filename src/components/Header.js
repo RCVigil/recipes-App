@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
@@ -6,6 +6,8 @@ import searchIcon from '../images/searchIcon.svg';
 function Header() {
   const history = useHistory();
   const { pathname } = history.location;
+
+  const [searchInput, setSearchInput] = useState(false);
 
   const titulo = () => {
     switch (pathname) {
@@ -46,11 +48,15 @@ function Header() {
         />
       </button>
       { searchShow()
-        && <img
-          src={ searchIcon }
-          alt="search"
-          data-testid="search-top-btn"
-        />}
+          && (
+            <button type="button" onClick={ () => setSearchInput(!searchInput) }>
+              <img
+                src={ searchIcon }
+                alt="search"
+                data-testid="search-top-btn"
+              />
+            </button>)}
+      { searchInput && <input data-testid="search-input" type="text" />}
     </header>
   );
 }
