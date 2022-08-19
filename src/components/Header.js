@@ -38,11 +38,13 @@ function Header() {
   return (
     <header>
       <h2 data-testid="page-title">{titulo()}</h2>
-      <img
-        src={ profileIcon }
-        alt="profile-pic"
-        data-testid="profile-top-btn"
-      />
+      <button type="button" onClick={ () => history.push('/profile') }>
+        <img
+          src={ profileIcon }
+          alt="profile-pic"
+          data-testid="profile-top-btn"
+        />
+      </button>
       { searchShow()
         && <img
           src={ searchIcon }
