@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import receitasContext from '../Context/ReceitasContext';
 
 export default function Login() {
   // const { email, setEmail, password, setPassword } = useContext(receitasContext);
