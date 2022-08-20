@@ -1,42 +1,39 @@
-import React from 'react';
-import ReceitasProvider from '../Context/ReceitasProvider';
+import React, { useState } from 'react';
+import receitasContext from '../Context/ReceitasContext';
 
 export default function Login() {
-  const { email, setEmail, password, setPassword } = ReceitasProvider();
+  // const { email, setEmail, password, setPassword } = useContext(receitasContext);
 
-  // validEmail = (email) => {
-  //   const userEmail = /\S+@\S+\.\S+/;
-  //   return userEmail.test(email);
-  // };
-  // validateInputs = () => {
-  //   const { email, password } = this.state;
-  //   const min = 6;
-  //   const checkValidation = this.validEmail(email);
-  //   if (password.length >= min && checkValidation) {
-  //     this.setState({
-  //       invalid: false,
-  //     });
-  //   } else {
-  //     this.setState({
-  //       invalid: true,
-  //     });
-  //   }
-  // };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const userEmail = /\S+@\S+\.\S+/;
+  const min = 7;
 
   return (
-    <div>
-      <label
-        htmlFor="email"
-      >
-        <input type="email" name="email" data-testid="email-input" />
+    <div data-testid="divLogin">
+      <label htmlFor="email">
+        <input
+          type="email"
+          name="email"
+          data-testid="email-input"
+          placeholder="email@email.com"
+          onChange={ ({ target }) => setEmail(target.value) }
+        />
 
-        <input type="password" name="password" data-testid="password-input" />
+        <input
+          type="password"
+          name="password"
+          data-testid="password-input"
+          placeholder="Password"
+          onChange={ ({ target }) => setPassword(target.value) }
+        />
       </label>
 
       <button
         type="submit"
         data-testid="login-submit-btn"
-        disabled="true"
+        disabled={ !(password.length >= min && userEmail.test(email)) }
       >
         Enter
       </button>
