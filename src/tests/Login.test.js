@@ -1,12 +1,13 @@
 import React from "react";
 import { render, screen } from '@testing-library/react'; 
-import App from "../App"
 import userEvent from '@testing-library/user-event'; 
+import App from "../App";
+import renderWithRouter from "./utils/renderWIthRouter";
 
 
 describe('Testando Login', () => {
   test('Renderizando a tela Login', () => {
-    render(<App />)
+    renderWithRouter(<App />)
   
     const login = screen.getByTestId(/divLogin/i)
   
@@ -14,7 +15,7 @@ describe('Testando Login', () => {
   });
 
   test('Testando input e-mail e password', () => {
-    render(<App />)
+    renderWithRouter(<App />)
   
     const email = screen.getByTestId(/email-input/i)
     
@@ -26,7 +27,7 @@ describe('Testando Login', () => {
   });
   
   test('testando o click no botão', () => {
-    render(<App />)
+    renderWithRouter(<App />)
 
     const email = screen.getByTestId(/email-input/i)
 
@@ -38,6 +39,8 @@ describe('Testando Login', () => {
 
     userEvent.type(email, "teste@test.com")
     userEvent.type(password, "1234567")
+
+    userEvent.click(botao)
 
   
     expect(botao).toBeEnabled();
