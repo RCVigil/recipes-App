@@ -39,10 +39,8 @@ describe('Testando Login', () => {
 
     userEvent.type(email, "teste@test.com")
     userEvent.type(password, "1234567")
-
-    userEvent.click(botao)
-
-  
     expect(botao).toBeEnabled();
+    
+    userEvent.click(botao)
   });
 });
