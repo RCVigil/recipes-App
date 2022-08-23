@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+// import { Route, } from 'react-router-dom';
 
 function SearchBar() {
   const [searchValue, setSearchValue] = useState('');
@@ -39,13 +40,17 @@ function SearchBar() {
         break;
       }
     }
-    console.log(endpoint);
     if (radioSelect === first && searchValue.length > 1) {
-      global.alert('Your search must have only 1 (one) character');
-    } else {
-      const response = await fetch(endpoint);
-      const dataResponse = await response.json();
-      console.log(dataResponse);
+      return global.alert('Your search must have only 1 (one) character');
+    }
+
+    const response = await fetch(endpoint);
+    const dataResponse = await response.json();
+    if (('drinks' in dataResponse) && dataResponse.drinks.length === 1) {
+      history.push(`/drinks/${dataResponse.drinks[0].idDrink}`);
+    }
+    if (('meals' in dataResponse) && dataResponse.meals.length === 1) {
+      history.push(`/foods/${dataResponse.meals[0].idMeal}`);
     }
   };
 
