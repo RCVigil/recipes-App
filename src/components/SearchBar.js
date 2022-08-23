@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import receitasContext from '../Context/ReceitasContext';
 // import { Route, } from 'react-router-dom';
 
 function SearchBar() {
   const [searchValue, setSearchValue] = useState('');
   const [radioSelect, setRadioSelect] = useState('');
+  const { setRecipes } = useContext(receitasContext);
   const history = useHistory();
   const { pathname } = history.location;
 
@@ -46,6 +48,8 @@ function SearchBar() {
 
     const response = await fetch(endpoint);
     const dataResponse = await response.json();
+    setRecipes(dataResponse);
+
     if (('drinks' in dataResponse) && dataResponse.drinks.length === 1) {
       history.push(`/drinks/${dataResponse.drinks[0].idDrink}`);
     }
