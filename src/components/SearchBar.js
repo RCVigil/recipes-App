@@ -1,27 +1,46 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function SearchBar() {
   const [searchValue, setSearchValue] = useState('');
   const [radioSelect, setRadioSelect] = useState('');
+  const history = useHistory();
+  const { pathname } = history.location;
 
   const buttonCLick = async () => {
     let endpoint = '';
-    console.log(endpoint);
-    switch (radioSelect) {
-    case 'Ingredient':
-      endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchValue}`;
-      break;
-    case 'Name':
-      endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
-      break;
-    case 'First letter':
-      endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchValue}`;
-      break;
-    default: endpoint = '';
-      break;
+    const first = 'First letter';
+    if (pathname === '/foods') {
+      switch (radioSelect) {
+      case 'Ingredient':
+        endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchValue}`;
+        break;
+      case 'Name':
+        endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
+        break;
+      case first:
+        endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchValue}`;
+        break;
+      default: endpoint = '';
+        break;
+      }
+    } else if (pathname === '/drinks') {
+      switch (radioSelect) {
+      case 'Ingredient':
+        endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchValue}`;
+        break;
+      case 'Name':
+        endpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchValue}`;
+        break;
+      case first:
+        endpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchValue}`;
+        break;
+      default: endpoint = '';
+        break;
+      }
     }
     console.log(endpoint);
-    if (radioSelect === 'First letter' && searchValue.length > 1) {
+    if (radioSelect === first && searchValue.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
       const response = await fetch(endpoint);
