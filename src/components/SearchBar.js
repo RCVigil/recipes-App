@@ -9,10 +9,10 @@ function SearchBar() {
   const { setRecipes } = useContext(receitasContext);
   const history = useHistory();
   const { pathname } = history.location;
+  const first = 'First letter';
 
-  const buttonCLick = async () => {
+  const definedEndPoint = () => {
     let endpoint = '';
-    const first = 'First letter';
     if (pathname === '/foods') {
       switch (radioSelect) {
       case 'Ingredient':
@@ -42,14 +42,27 @@ function SearchBar() {
         break;
       }
     }
+    return endpoint;
+  };
+
+  const buttonCLick = async () => {
+    const endDefinition = definedEndPoint();
     if (radioSelect === first && searchValue.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
 
-    const response = await fetch(endpoint);
-    const dataResponse = await response.json();
+    const response = await fetch(endDefinition);
+    let dataResponse = {};
+    console.log(response.le);
+    if (response === null) {
+      dataResponse = { drinks: null };
+    } else {
+      dataResponse = await response.json();
+    }
     setRecipes(dataResponse);
-
+    if (dataResponse.meals === null || dataResponse.ingredients === null) {
+      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
     if (('drinks' in dataResponse) && dataResponse.drinks.length === 1) {
       history.push(`/drinks/${dataResponse.drinks[0].idDrink}`);
     }
