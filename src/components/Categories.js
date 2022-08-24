@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import receitasContext from '../Context/ReceitasContext';
 
 export default function Categories() {
   const { category, setRecipes, getMeals, getDrinks } = useContext(receitasContext);
   const num = 5;
+  const [categoryState, setCategoryState] = useState(true);
 
   const history = useHistory();
   const { pathname } = history.location;
@@ -19,17 +20,27 @@ export default function Categories() {
   };
 
   const mealsFilter = async (elemF) => {
-    const responseApi = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${elemF}`);
-    const dataApi = await responseApi.json();
-    console.log(dataApi);
-    setRecipes(dataApi);
+    setCategoryState(!categoryState);
+    if (categoryState) {
+      const responseApi = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${elemF}`);
+      const dataApi = await responseApi.json();
+      console.log(dataApi);
+      setRecipes(dataApi);
+    } else {
+      getMeals();
+    }
   };
 
   const drinksFilter = async (elemF) => {
-    const responseApi = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${elemF}`);
-    const dataApi = await responseApi.json();
-    console.log(dataApi);
-    setRecipes(dataApi);
+    setCategoryState(!categoryState);
+    if (categoryState) {
+      const responseApi = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${elemF}`);
+      const dataApi = await responseApi.json();
+      console.log(dataApi);
+      setRecipes(dataApi);
+    } else {
+      getDrinks();
+    }
   };
 
   return (
