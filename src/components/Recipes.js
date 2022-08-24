@@ -5,7 +5,8 @@ export default function Recipes() {
   const { recipes } = useContext(receitasContext);
   const style = {
     flexWrap: 'wrap',
-    width: '50px',
+    width: '5px',
+    display: 'flex',
   };
 
   // const style2 = {

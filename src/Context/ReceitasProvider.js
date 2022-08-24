@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import receitasContext from './ReceitasContext';
 
 const ReceitasProvider = ({ children }) => {
-  // const [email, setEmail] = useState('');
+  const [category, setCategory] = useState([]);
   const [recipes, setRecipes] = useState([]);
 
   const revcontext = {
     recipes,
     setRecipes,
-    // password,
-    // setPassword,
+    setCategory,
+    category,
   };
   return (
     <receitasContext.Provider
