@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import receitasContext from '../Context/ReceitasContext';
 // import { Route, } from 'react-router-dom';
 
 function SearchBar() {
   const [searchValue, setSearchValue] = useState('');
   const [radioSelect, setRadioSelect] = useState('');
+  const { setRecipes } = useContext(receitasContext);
   const history = useHistory();
   const { pathname } = history.location;
+  const first = 'First letter';
 
-  const buttonCLick = async () => {
+  const definedEndPoint = () => {
     let endpoint = '';
-    const first = 'First letter';
     if (pathname === '/foods') {
       switch (radioSelect) {
       case 'Ingredient':
@@ -40,12 +42,31 @@ function SearchBar() {
         break;
       }
     }
+    return endpoint;
+  };
+
+  const fetchApi = async (endDefinition) => {
+    try {
+      const response = await fetch(endDefinition);
+      const dataResponse = await response.json();
+      return dataResponse;
+    } catch (error) {
+      return { drinks : null }
+    }
+  };
+
+  const buttonCLick = async () => {
+    const endDefinition = definedEndPoint();
     if (radioSelect === first && searchValue.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
 
-    const response = await fetch(endpoint);
-    const dataResponse = await response.json();
+    const dataResponse = await fetchApi(endDefinition);
+
+    setRecipes(dataResponse);
+    if (dataResponse.meals === null || dataResponse.drinks === null) {
+      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
     if (('drinks' in dataResponse) && dataResponse.drinks.length === 1) {
       history.push(`/drinks/${dataResponse.drinks[0].idDrink}`);
     }
