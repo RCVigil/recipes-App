@@ -45,22 +45,26 @@ function SearchBar() {
     return endpoint;
   };
 
+  const fetchApi = async (endDefinition) => {
+    try {
+      const response = await fetch(endDefinition);
+      const dataResponse = await response.json();
+      return dataResponse;
+    } catch (error) {
+      return { drinks : null }
+    }
+  };
+
   const buttonCLick = async () => {
     const endDefinition = definedEndPoint();
     if (radioSelect === first && searchValue.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
 
-    const response = await fetch(endDefinition);
-    let dataResponse = {};
-    console.log(response.le);
-    if (response === null) {
-      dataResponse = { drinks: null };
-    } else {
-      dataResponse = await response.json();
-    }
+    const dataResponse = await fetchApi(endDefinition);
+
     setRecipes(dataResponse);
-    if (dataResponse.meals === null || dataResponse.ingredients === null) {
+    if (dataResponse.meals === null || dataResponse.drinks === null) {
       return global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
     if (('drinks' in dataResponse) && dataResponse.drinks.length === 1) {
