@@ -20,43 +20,54 @@ export default function Recipes() {
       {recipes.meals && recipes.meals.map((elem, index) => (
         index < num
           ? (
-            <div
-              data-testid={ `${index}-recipe-card` }
-              key={ index }
+            <a
+              data-testid={ `ridiculuos${index}` }
+              href={ `/foods/${elem.idMeal}` }
             >
-              <img
-                style={ style }
-                data-testid={ `${index}-card-img` }
-                src={ elem.strMealThumb }
-                alt=""
-              />
-              <p
-                data-testid={ `${index}-card-name` }
+              <div
+                data-testid={ `${index}-recipe-card` }
+                key={ index }
               >
-                {elem.strMeal}
-              </p>
-            </div>) : ''
+                <img
+                  style={ style }
+                  data-testid={ `${index}-card-img` }
+                  src={ elem.strMealThumb }
+                  alt=""
+                />
+                <p
+                  data-testid={ `${index}-card-name` }
+                >
+                  {elem.strMeal}
+                </p>
+              </div>
+            </a>
+          ) : ''
       ))}
 
       {recipes.drinks && recipes.drinks.map((elem, index) => (
         index < num
           ? (
-            <div
-              data-testid={ `${index}-recipe-card` }
-              key={ index }
+            <a
+              href={ `/drinks/${elem.idDrink}` }
             >
-              <img
-                style={ style }
-                data-testid={ `${index}-card-img` }
-                src={ elem.strDrinkThumb }
-                alt=""
-              />
-              <p
-                data-testid={ `${index}-card-name` }
+              <div
+                data-testid={ `${index}-recipe-card` }
+                key={ index }
               >
-                {elem.strDrink}
-              </p>
-            </div>) : ''
+                <img
+                  style={ style }
+                  data-testid={ `${index}-card-img` }
+                  src={ elem.strDrinkThumb }
+                  alt=""
+                />
+                <p
+                  data-testid={ `${index}-card-name` }
+                >
+                  {elem.strDrink}
+                </p>
+              </div>
+            </a>
+          ) : ''
       ))}
 
     </div>
