@@ -51,7 +51,7 @@ function SearchBar() {
       const dataResponse = await response.json();
       return dataResponse;
     } catch (error) {
-      return { drinks : null }
+      return { drinks: null };
     }
   };
 
