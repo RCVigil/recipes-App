@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import Header from "../components/Header";
 import renderWithRouter from './utils/renderWIthRouter'
 import App from '../App'
+import ReceitasProvider from "../Context/ReceitasProvider";
 
 describe('atingir 45% de coverage', () => {
   test('testa se o header possui os intes na tela', () => {
@@ -23,7 +24,7 @@ describe('atingir 45% de coverage', () => {
   })
 
   test('testa se o header possui os intes na tela', () => {
-    const { history } = renderWithRouter(<App />)
+    const { history } = renderWithRouter(<ReceitasProvider><App /></ReceitasProvider>)
     history.push('/foods')
     
     const profile = screen.getByAltText('profile-pic');
@@ -36,7 +37,7 @@ describe('atingir 45% de coverage', () => {
   })
 
   test('testa se o header utiliza o botao search', () => {
-    const { history } = renderWithRouter(<App />)
+    const { history } = renderWithRouter(<ReceitasProvider><App /></ReceitasProvider>)
     history.push('/foods')
     
     const search = screen.getByTestId('search-top-btn');
@@ -52,7 +53,7 @@ describe('atingir 45% de coverage', () => {
   })
 
   test('testa se o header possui os intes na tela', () => {
-    const { history } = renderWithRouter(<App />)
+    const { history } = renderWithRouter(<ReceitasProvider><App /></ReceitasProvider>)
     
     history.push('/drinks')
     

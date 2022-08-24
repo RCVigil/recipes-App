@@ -1,13 +1,14 @@
 import React from "react";
 import { screen, render } from "@testing-library/react";
 import userEvent from '@testing-library/user-event' 
-import Footer from '../components/Footer'
+// import Footer from '../components/Footer'
 import renderWithRouter from "./utils/renderWIthRouter";
 import App from "../App";
+import ReceitasProvider from "../Context/ReceitasProvider";
 
 describe('Testando component Footer', () => {
   test('Testando Botões', () => {
-    const { history } = renderWithRouter(<App />)
+    const { history } = renderWithRouter(<ReceitasProvider><App /></ReceitasProvider>)
 history.push('/foods') 
     const botaoComida = screen.getByRole('img', {  name: /imagem de comida/i})
     userEvent.click(botaoComida)
@@ -18,7 +19,7 @@ history.push('/foods')
   });
 
   test('Testando Botões', () => {
-    const { history } = renderWithRouter(<App />)
+    const { history } = renderWithRouter(<ReceitasProvider><App /></ReceitasProvider>)
 history.push('/drinks') 
     const botaoBebida = screen.getByRole('img', {  name: /imagem de drinks/i})
     userEvent.click(botaoBebida)
