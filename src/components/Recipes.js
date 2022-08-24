@@ -24,7 +24,6 @@ export default function Recipes() {
               data-testid={ `${index}-recipe-card` }
               key={ index }
             >
-              {console.log(index)}
               <img
                 style={ style }
                 data-testid={ `${index}-card-img` }
@@ -46,7 +45,6 @@ export default function Recipes() {
               data-testid={ `${index}-recipe-card` }
               key={ index }
             >
-              {console.log(elem)}
               <img
                 style={ style }
                 data-testid={ `${index}-card-img` }

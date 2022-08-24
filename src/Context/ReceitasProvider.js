@@ -6,11 +6,27 @@ const ReceitasProvider = ({ children }) => {
   const [category, setCategory] = useState([]);
   const [recipes, setRecipes] = useState([]);
 
+  const getMeals = async () => {
+    const responseApi = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const dataApi = await responseApi.json();
+    console.log(dataApi);
+    setRecipes(dataApi);
+  };
+
+  const getDrinks = async () => {
+    const responseApi = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const dataApi = await responseApi.json();
+    console.log(dataApi);
+    setRecipes(dataApi);
+  };
+
   const revcontext = {
     recipes,
     setRecipes,
     setCategory,
     category,
+    getMeals,
+    getDrinks,
   };
   return (
     <receitasContext.Provider

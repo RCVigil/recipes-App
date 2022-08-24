@@ -6,14 +6,8 @@ import Recipes from '../components/Recipes';
 import receitasContext from '../Context/ReceitasContext';
 
 function Foods() {
-  const { recipes, setRecipes, category, setCategory } = useContext(receitasContext);
+  const { recipes, getMeals, category, setCategory } = useContext(receitasContext);
   useEffect(() => {
-    const getMeals = async () => {
-      const responseApi = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-      const dataApi = await responseApi.json();
-      console.log(dataApi);
-      setRecipes(dataApi);
-    };
     const getCategories = async () => {
       const responseApi = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
       const dataApi = await responseApi.json();
