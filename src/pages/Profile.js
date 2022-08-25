@@ -3,13 +3,18 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile() {
+  const getEmail = () => {
+    const text = localStorage.getItem('user');
+    const email = JSON.parse(text);
+    return email.email;
+  };
   return (
     <div>
       <Header />
       <h1
         data-testid="profile-email"
       >
-        email
+        {getEmail()}
       </h1>
       <button
         type="button"
