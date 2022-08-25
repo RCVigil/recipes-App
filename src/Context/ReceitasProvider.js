@@ -5,6 +5,7 @@ import receitasContext from './ReceitasContext';
 const ReceitasProvider = ({ children }) => {
   const [category, setCategory] = useState([]);
   const [recipes, setRecipes] = useState([]);
+  const [recipeDetail, setRecipeDetail] = useState([]);
 
   const getMeals = async () => {
     const responseApi = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
@@ -27,6 +28,8 @@ const ReceitasProvider = ({ children }) => {
     category,
     getMeals,
     getDrinks,
+    recipeDetail,
+    setRecipeDetail,
   };
   return (
     <receitasContext.Provider
