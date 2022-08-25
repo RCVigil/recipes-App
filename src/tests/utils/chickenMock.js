@@ -1,4 +1,4 @@
-const chickenMock = [
+const chickenMock = { meals: [
     {
         "strMeal": "Brown Stew Chicken",
         "strMealThumb": "https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg",
@@ -54,6 +54,6 @@ const chickenMock = [
         "strMealThumb": "https://www.themealdb.com/images/media/meals/sstssx1487349585.jpg",
         "idMeal": "52814"
     }
-]
+]}
 
 export default chickenMock
