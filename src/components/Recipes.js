@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import receitasContext from '../Context/ReceitasContext';
 
 export default function Recipes() {
@@ -9,10 +10,6 @@ export default function Recipes() {
     display: 'flex',
   };
 
-  // const style2 = {
-  //   diplay: 'flex',
-  // };
-
   const num = 12;
 
   return (
@@ -20,13 +17,13 @@ export default function Recipes() {
       {recipes.meals && recipes.meals.map((elem, index) => (
         index < num
           ? (
-            <a
-              data-testid={ `ridiculuos${index}` }
-              href={ `/foods/${elem.idMeal}` }
+
+            <div
+              data-testid={ `${index}-recipe-card` }
+              key={ index }
             >
-              <div
-                data-testid={ `${index}-recipe-card` }
-                key={ index }
+              <Link
+                to={ `/foods/${elem.idMeal}` }
               >
                 <img
                   style={ style }
@@ -39,20 +36,21 @@ export default function Recipes() {
                 >
                   {elem.strMeal}
                 </p>
-              </div>
-            </a>
+              </Link>
+            </div>
           ) : ''
       ))}
 
       {recipes.drinks && recipes.drinks.map((elem, index) => (
         index < num
           ? (
-            <a
-              href={ `/drinks/${elem.idDrink}` }
+
+            <div
+              data-testid={ `${index}-recipe-card` }
+              key={ index }
             >
-              <div
-                data-testid={ `${index}-recipe-card` }
-                key={ index }
+              <Link
+                to={ `/drinks/${elem.idDrink}` }
               >
                 <img
                   style={ style }
@@ -65,8 +63,8 @@ export default function Recipes() {
                 >
                   {elem.strDrink}
                 </p>
-              </div>
-            </a>
+              </Link>
+            </div>
           ) : ''
       ))}
 
