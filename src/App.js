@@ -18,8 +18,8 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/foods" component={ Foods } />
         <Route exact path="/drinks" component={ Drinks } />
-        <Route exact path="/foods:id" component={ FoodDetails } />
-        <Route exact path="/drinks:id" component={ DrinkDetails } />
+        <Route exact path="/foods/:id" component={ FoodDetails } />
+        <Route exact path="/drinks/:id" component={ DrinkDetails } />
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/done-recipes" component={ DoneRecipes } />
         <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
