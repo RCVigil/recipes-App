@@ -12,19 +12,6 @@ function Profile() {
     return email.email;
   };
 
-  const goToDoneRecipes = () => {
-    history.push('/done-recipes');
-  };
-
-  const goToFavorites = () => {
-    history.push('/favorite-recipes');
-  };
-
-  const logout = () => {
-    localStorage.clear();
-    history.push('/');
-  };
-
   return (
     <div>
       <Header />
@@ -36,21 +23,24 @@ function Profile() {
       <button
         type="button"
         data-testid="profile-logout-btn"
-        onClick={ logout }
+        onClick={ () => {
+          localStorage.clear();
+          history.push('/');
+        } }
       >
         Logout
       </button>
       <button
         type="button"
         data-testid="profile-done-btn"
-        onClick={ goToDoneRecipes }
+        onClick={ () => history.push('/done-recipes') }
       >
         Done Recipes
       </button>
       <button
         type="button"
         data-testid="profile-favorite-btn"
-        onClick={ goToFavorites }
+        onClick={ () => history.push('/favorite-recipes') }
       >
         Favorite Recipes
       </button>
