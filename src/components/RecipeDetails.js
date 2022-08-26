@@ -10,6 +10,11 @@ export default function RecipeDetails() {
   const splited = pathname.split('/');
   const numCarros = 6;
 
+  const style = {
+    position: 'fixed',
+    bottom: '0px',
+  };
+
   const ingredient = () => {
     if (splited[1] === 'foods') {
       const magicIngre1 = Object.keys(recipeDetail.meals[0]).indexOf(
@@ -74,18 +79,85 @@ export default function RecipeDetails() {
 
   return (
     <div>
-      {splited[1] === 'foods' ? (
-        <div>
-          <img
-            data-testid="recipe-photo"
-            src={ recipeDetail.meals[0].strMealThumb }
-            width="200px"
-            alt=""
-          />
-          <h2 data-testid="recipe-title">{recipeDetail.meals[0].strMeal}</h2>
-          <h4 data-testid="recipe-category">
-            {recipeDetail.meals[0].strCategory}
-          </h4>
+      { splited[1] === 'foods'
+
+        ? (
+          <div>
+            <img
+              data-testid="recipe-photo"
+              src={ recipeDetail.meals[0].strMealThumb }
+              width="200px"
+              alt=""
+            />
+            <h2 data-testid="recipe-title">{recipeDetail.meals[0].strMeal}</h2>
+            <h4 data-testid="recipe-category">{recipeDetail.meals[0].strCategory}</h4>
+
+            <ul>
+              {ingredientes.map((a, i) => (
+                <li
+                  key={ i }
+                  data-testid={ `${i}-ingredient-name-and-measure` }
+                >
+                  {`${a} ${medidas[i]}`}
+
+                </li>
+              ))}
+
+            </ul>
+
+            <p data-testid="instructions">{recipeDetail.meals[0].strInstructions}</p>
+            <iframe
+              src={ recipeDetail.meals[0].strYoutube }
+              title="youtubevideo"
+              data-testid="video"
+            />
+            <p data-testid={ `${index}-recomendation-card` }>oi</p>
+
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              style={ style }
+              onClick={ () => (
+                history.push(`/foods/${recipeDetail.meals[0].idMeal}/in-progress`)
+              ) }
+            >
+              Start Recipe
+            </button>
+            <button
+              type="button"
+              data-testid="share-btn"
+            >
+              Compartilhar
+            </button>
+            <button
+              type="button"
+              data-testid="favorite-btn"
+            >
+              Favoritar
+            </button>
+          </div>)
+        : (
+          <div>
+
+            <img
+              data-testid="recipe-photo"
+              src={ recipeDetail.drinks[0].strDrinkThumb }
+              width="50px"
+              alt=""
+            />
+            <h2 data-testid="recipe-title">{ recipeDetail.drinks[0].strDrink }</h2>
+            <h4 data-testid="recipe-category">
+              { recipeDetail.drinks[0].strCategory
+            + recipeDetail.drinks[0].strAlcoholic }
+
+            </h4>
+            <ul>
+              {ingredientes.map((a2, i2) => (
+                <li
+                  key={ i2 }
+                  data-testid={ `${i2}-ingredient-name-and-measure` }
+                >
+                  {`${a2} ${medidas[i2]}`}
 
           <ul>
             {ingredientes.map((a, i) => (
@@ -121,8 +193,30 @@ export default function RecipeDetails() {
                       alt=""
                     />
                     <p data-testid={ `${ind}-recomendation-title` }>{el.strDrink}</p>
-                  </div>
+                  </div>              
                 ))}
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              style={ style }
+              onClick={ () => (
+                history.push(`/foods/${recipeDetail.meals[0].idMeal}/in-progress`)
+              ) }
+            >
+              Start Recipe
+            </button>
+            <button
+              type="button"
+              data-testid="share-btn"
+            >
+              Compartilhar
+            </button>
+            <button
+              type="button"
+              data-testid="favorite-btn"
+            >
+              Favoritar
+            </button>
             </div>
           )}
         </div>
@@ -171,6 +265,28 @@ export default function RecipeDetails() {
                 ))}
             </div>
           )}
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              style={ style }
+              onClick={ () => (
+                history.push(`/drinks/${recipeDetail.drinks[0].idDrink}/in-progress`)
+              ) }
+            >
+              Start Recipe
+            </button>
+            <button
+              type="button"
+              data-testid="share-btn"
+            >
+              Compartilhar
+            </button>
+            <button
+              type="button"
+              data-testid="favorite-btn"
+            >
+              Favoritar
+            </button>
         </div>
       )}
     </div>
