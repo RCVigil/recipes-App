@@ -3,11 +3,11 @@ import { useHistory } from 'react-router-dom';
 import receitasContext from '../Context/ReceitasContext';
 
 export default function RecipeDetails() {
-  const { recipeDetail, getMeals, getDrinks } = useContext(receitasContext);
+  const { recipeDetail, getMeals, getDrinks, recipes } = useContext(receitasContext);
   const history = useHistory();
   const { pathname } = history.location;
   const splited = pathname.split('/');
-  const index = 0;
+  const numCarr = 6;
 
   const ingredient = () => {
     if (splited[1] === 'foods') {
@@ -87,7 +87,19 @@ export default function RecipeDetails() {
               title="youtubevideo"
               data-testid="video"
             />
-            <p data-testid={ `${index}-recomendation-card` }>oi</p>
+            {recipes.drinks && recipes.drinks.filter((a, i) => i < numCarr).map(
+              (el, ind) => (
+                <div
+                  data-testid={ `${ind}-recomendation-card` }
+                  key={ ind }
+                >
+                  <p
+                    data-testid={ `${ind}-recomendation-title` }
+                  >
+                    {el.strDrink}
+                  </p>
+                </div>),
+            )}
 
           </div>)
         : (
@@ -118,7 +130,19 @@ export default function RecipeDetails() {
 
             </ul>
             <p data-testid="instructions">{ recipeDetail.drinks[0].strInstructions}</p>
-            <p data-testid={ `${index}-recomendation-card` }>oi</p>
+            {recipes.meals && recipes.meals.filter((a, i) => i < numCarr).map(
+              (el, ind) => (
+                <div
+                  data-testid={ `${ind}-recomendation-card` }
+                  key={ ind }
+                >
+                  <p
+                    data-testid={ `${ind}-recomendation-title` }
+                  >
+                    {el.strMeal}
+                  </p>
+                </div>),
+            )}
           </div>)}
     </div>
   );
