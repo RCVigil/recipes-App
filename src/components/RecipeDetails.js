@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import receitasContext from '../Context/ReceitasContext';
 
 export default function RecipeDetails() {
-  const { recipeDetail } = useContext(receitasContext);
+  const { recipeDetail, getMeals, getDrinks } = useContext(receitasContext);
   const history = useHistory();
   const { pathname } = history.location;
   const splited = pathname.split('/');
@@ -15,11 +15,13 @@ export default function RecipeDetails() {
         Object.keys(recipeDetail.meals[0])
           .indexOf('strIngredient1'));
       const magicIngre2 = (Object.keys(recipeDetail.meals[0]).indexOf('strIngredient20'));
+      // getDrinks();
       return Object.values(recipeDetail.meals[0])
         .filter((a, i) => i <= magicIngre2 && i >= magicIngre1);
     }
     const magicDrink1 = (Object.keys(recipeDetail.drinks[0]).indexOf('strIngredient1'));
     const magicDrink2 = (Object.keys(recipeDetail.drinks[0]).indexOf('strIngredient15'));
+    // getMeals();
     return Object.values(recipeDetail.drinks[0])
       .filter((a, i) => i <= magicDrink2 && i >= magicDrink1);
   };
@@ -40,7 +42,15 @@ export default function RecipeDetails() {
   const medidas = measure().filter((a) => a !== null && a !== '');
 
   useEffect(() => {
-    console.log(ingredientes, medidas);
+    const indication = () => {
+      if (splited[1] === 'foods') {
+        getDrinks();
+      } else {
+        getMeals();
+      }
+    };
+
+    indication();
   }, []);
 
   return (
