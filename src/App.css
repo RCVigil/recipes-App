@@ -70,3 +70,24 @@ body {
     transform: rotate(-10deg);
   }
 }
+
+.carrossel {
+  border: 3px solid red;
+  display: flex;
+  max-height: 200px;
+  max-width: 250px;
+  overflow-x: auto;
+}
+
+.carrosselItem {
+  border: 2px solid black;
+  flex: none;
+  margin: 10px;
+  width: 50%;
+}
+
+.carrosselimg {
+  height: 50px;
+  object-fit: contain;
+  width: 30px;
+}
