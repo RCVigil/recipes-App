@@ -9,11 +9,6 @@ function DrinkDetails() {
   const { pathname } = history.location;
   const splited = pathname.split('/');
 
-  const style = {
-    position: 'fixed',
-    bottom: '0px',
-  };
-
   const getFoodDetail = async () => {
     if (splited[1] === 'foods') {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${splited[2]}`);
@@ -33,13 +28,6 @@ function DrinkDetails() {
   return (
     <div>
       {recipeDetail.drinks && <RecipeDetail />}
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        style={ style }
-      >
-        Start Recipe
-      </button>
     </div>
   );
 }
