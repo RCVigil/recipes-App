@@ -36,13 +36,6 @@ export default function Footer() {
           alt="Imagem de Comida"
         />
       </button>
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        style={ style }
-      >
-        Start Recipe
-      </button>
     </div>
   );
 }
