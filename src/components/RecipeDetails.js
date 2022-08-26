@@ -9,6 +9,11 @@ export default function RecipeDetails() {
   const splited = pathname.split('/');
   const index = 0;
 
+  const style = {
+    position: 'fixed',
+    bottom: '0px',
+  };
+
   const ingredient = () => {
     if (splited[1] === 'foods') {
       const magicIngre1 = (
@@ -40,6 +45,7 @@ export default function RecipeDetails() {
   const medidas = measure().filter((a) => a !== null && a !== '');
 
   useEffect(() => {
+    console.log(recipeDetail);
     console.log(ingredientes, medidas);
   }, []);
 
@@ -79,6 +85,16 @@ export default function RecipeDetails() {
             />
             <p data-testid={ `${index}-recomendation-card` }>oi</p>
 
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              style={ style }
+              onClick={ () => (
+                history.push(`/foods/${recipeDetail.meals[0].idMeal}/in-progress`)
+              ) }
+            >
+              Start Recipe
+            </button>
           </div>)
         : (
           <div>
@@ -109,6 +125,17 @@ export default function RecipeDetails() {
             </ul>
             <p data-testid="instructions">{ recipeDetail.drinks[0].strInstructions}</p>
             <p data-testid={ `${index}-recomendation-card` }>oi</p>
+
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              style={ style }
+              onClick={ () => (
+                history.push(`/drinks/${recipeDetail.drinks[0].idDrink}/in-progress`)
+              ) }
+            >
+              Start Recipe
+            </button>
           </div>)}
     </div>
   );
