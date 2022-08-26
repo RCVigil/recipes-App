@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import receitasContext from '../Context/ReceitasContext';
+import '../App.css';
 
 export default function RecipeDetails() {
-  const { recipeDetail } = useContext(receitasContext);
+  const { recipeDetail, getMeals, getDrinks, recipes } = useContext(receitasContext);
   const history = useHistory();
   const { pathname } = history.location;
   const splited = pathname.split('/');
-  const index = 0;
+  const numCarros = 6;
 
   const style = {
     position: 'fixed',
@@ -16,37 +17,64 @@ export default function RecipeDetails() {
 
   const ingredient = () => {
     if (splited[1] === 'foods') {
-      const magicIngre1 = (
-        Object.keys(recipeDetail.meals[0])
-          .indexOf('strIngredient1'));
-      const magicIngre2 = (Object.keys(recipeDetail.meals[0]).indexOf('strIngredient20'));
-      return Object.values(recipeDetail.meals[0])
-        .filter((a, i) => i <= magicIngre2 && i >= magicIngre1);
+      const magicIngre1 = Object.keys(recipeDetail.meals[0]).indexOf(
+        'strIngredient1',
+      );
+      const magicIngre2 = Object.keys(recipeDetail.meals[0]).indexOf(
+        'strIngredient20',
+      );
+      // getDrinks();
+      return Object.values(recipeDetail.meals[0]).filter(
+        (a, i) => i <= magicIngre2 && i >= magicIngre1,
+      );
     }
-    const magicDrink1 = (Object.keys(recipeDetail.drinks[0]).indexOf('strIngredient1'));
-    const magicDrink2 = (Object.keys(recipeDetail.drinks[0]).indexOf('strIngredient15'));
-    return Object.values(recipeDetail.drinks[0])
-      .filter((a, i) => i <= magicDrink2 && i >= magicDrink1);
+    const magicDrink1 = Object.keys(recipeDetail.drinks[0]).indexOf(
+      'strIngredient1',
+    );
+    const magicDrink2 = Object.keys(recipeDetail.drinks[0]).indexOf(
+      'strIngredient15',
+    );
+    // getMeals();
+    return Object.values(recipeDetail.drinks[0]).filter(
+      (a, i) => i <= magicDrink2 && i >= magicDrink1,
+    );
   };
 
   const measure = () => {
     if (splited[1] === 'foods') {
-      const magicIngre1 = (Object.keys(recipeDetail.meals[0]).indexOf('strMeasure1'));
-      const magicIngre2 = (Object.keys(recipeDetail.meals[0]).indexOf('strMeasure20'));
-      return Object.values(recipeDetail.meals[0])
-        .filter((a, i) => i <= magicIngre2 && i >= magicIngre1);
+      const magicIngre1 = Object.keys(recipeDetail.meals[0]).indexOf(
+        'strMeasure1',
+      );
+      const magicIngre2 = Object.keys(recipeDetail.meals[0]).indexOf(
+        'strMeasure20',
+      );
+      return Object.values(recipeDetail.meals[0]).filter(
+        (a, i) => i <= magicIngre2 && i >= magicIngre1,
+      );
     }
-    const magicDrink1 = (Object.keys(recipeDetail.drinks[0]).indexOf('strMeasure1'));
-    const magicDrink2 = (Object.keys(recipeDetail.drinks[0]).indexOf('strMeasure15'));
-    return Object.values(recipeDetail.drinks[0])
-      .filter((a, i) => i <= magicDrink2 && i >= magicDrink1);
+    const magicDrink1 = Object.keys(recipeDetail.drinks[0]).indexOf(
+      'strMeasure1',
+    );
+    const magicDrink2 = Object.keys(recipeDetail.drinks[0]).indexOf(
+      'strMeasure15',
+    );
+    return Object.values(recipeDetail.drinks[0]).filter(
+      (a, i) => i <= magicDrink2 && i >= magicDrink1,
+    );
   };
   const ingredientes = ingredient().filter((a) => a !== null && a !== '');
   const medidas = measure().filter((a) => a !== null && a !== '');
 
   useEffect(() => {
-    console.log(recipeDetail);
-    console.log(ingredientes, medidas);
+    const indication = () => {
+      if (splited[1] === 'foods') {
+        getDrinks();
+      } else {
+        getMeals();
+      }
+    };
+
+    indication();
   }, []);
 
   return (
@@ -131,13 +159,112 @@ export default function RecipeDetails() {
                 >
                   {`${a2} ${medidas[i2]}`}
 
-                </li>
-              ))}
+          <ul>
+            {ingredientes.map((a, i) => (
+              <li key={ i } data-testid={ `${i}-ingredient-name-and-measure` }>
+                {`${a} ${medidas[i]}`}
+              </li>
+            ))}
+          </ul>
 
-            </ul>
-            <p data-testid="instructions">{ recipeDetail.drinks[0].strInstructions}</p>
-            <p data-testid={ `${index}-recomendation-card` }>oi</p>
-
+          <p data-testid="instructions">
+            {recipeDetail.meals[0].strInstructions}
+          </p>
+          <iframe
+            src={ recipeDetail.meals[0].strYoutube }
+            title="youtubevideo"
+            data-testid="video"
+          />
+          {recipes.drinks && (
+            <div
+              className="carrossel"
+            >
+              {recipes.drinks
+                .filter((a, i) => i < numCarros)
+                .map((el, ind) => (
+                  <div
+                    className="carrosselItem"
+                    data-testid={ `${ind}-recomendation-card` }
+                    key={ ind }
+                  >
+                    <img
+                      className="carrosselimg"
+                      src={ el.strDrinkThumb }
+                      alt=""
+                    />
+                    <p data-testid={ `${ind}-recomendation-title` }>{el.strDrink}</p>
+                  </div>              
+                ))}
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              style={ style }
+              onClick={ () => (
+                history.push(`/foods/${recipeDetail.meals[0].idMeal}/in-progress`)
+              ) }
+            >
+              Start Recipe
+            </button>
+            <button
+              type="button"
+              data-testid="share-btn"
+            >
+              Compartilhar
+            </button>
+            <button
+              type="button"
+              data-testid="favorite-btn"
+            >
+              Favoritar
+            </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div>
+          <img
+            data-testid="recipe-photo"
+            src={ recipeDetail.drinks[0].strDrinkThumb }
+            width="50px"
+            alt=""
+          />
+          <h2 data-testid="recipe-title">{recipeDetail.drinks[0].strDrink}</h2>
+          <h4 data-testid="recipe-category">
+            {recipeDetail.drinks[0].strCategory
+              + recipeDetail.drinks[0].strAlcoholic}
+          </h4>
+          <ul>
+            {ingredientes.map((a2, i2) => (
+              <li key={ i2 } data-testid={ `${i2}-ingredient-name-and-measure` }>
+                {`${a2} ${medidas[i2]}`}
+              </li>
+            ))}
+          </ul>
+          <p data-testid="instructions">
+            {recipeDetail.drinks[0].strInstructions}
+          </p>
+          {recipes.meals && (
+            <div
+              className="carrossel"
+            >
+              {recipes.meals
+                .filter((a, i) => i < numCarros)
+                .map((el, ind) => (
+                  <div
+                    className="carrosselItem"
+                    data-testid={ `${ind}-recomendation-card` }
+                    key={ ind }
+                  >
+                    <img
+                      className="carrosselimg"
+                      src={ el.strMealThumb }
+                      alt=""
+                    />
+                    <p data-testid={ `${ind}-recomendation-title` }>{el.strMeal}</p>
+                  </div>
+                ))}
+            </div>
+          )}
             <button
               type="button"
               data-testid="start-recipe-btn"
@@ -160,7 +287,8 @@ export default function RecipeDetails() {
             >
               Favoritar
             </button>
-          </div>)}
+        </div>
+      )}
     </div>
   );
 }
