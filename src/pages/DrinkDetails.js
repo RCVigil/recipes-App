@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import RecipeDetail from '../components/RecipeDetails';
 import receitasContext from '../Context/ReceitasContext';
 
@@ -30,6 +31,7 @@ function DrinkDetails() {
     <div>
       <Header />
       {recipeDetail.drinks && <RecipeDetail />}
+      <Footer />
     </div>
   );
 }
