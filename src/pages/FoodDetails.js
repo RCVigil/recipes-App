@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+// import Footer from '../components/Footer';
 import RecipeDetail from '../components/RecipeDetails';
 import receitasContext from '../Context/ReceitasContext';
 
@@ -10,6 +9,11 @@ function FoodDetails() {
   const history = useHistory();
   const { pathname } = history.location;
   const splited = pathname.split('/');
+
+  const style = {
+    position: 'fixed',
+    bottom: '0px',
+  };
 
   const getFoodDetail = async () => {
     if (splited[1] === 'foods') {
@@ -29,9 +33,14 @@ function FoodDetails() {
 
   return (
     <div>
-      <Header />
       { recipeDetail.meals && <RecipeDetail />}
-      <Footer />
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        style={ style }
+      >
+        Start Recipe
+      </button>
     </div>
   );
 }
