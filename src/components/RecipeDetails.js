@@ -10,29 +10,31 @@ export default function RecipeDetails() {
   const index = 0;
 
   const ingredient = () => {
-    const magicIngre1 = 29;
-    const magicIngre2 = 8;
-    const magicDrink1 = 16;
-    const magicDrink2 = 32;
     if (splited[1] === 'foods') {
+      const magicIngre1 = (
+        Object.keys(recipeDetail.meals[0])
+          .indexOf('strIngredient1'));
+      const magicIngre2 = (Object.keys(recipeDetail.meals[0]).indexOf('strIngredient20'));
       return Object.values(recipeDetail.meals[0])
-        .filter((a, i) => i < magicIngre1 && i > magicIngre2);
+        .filter((a, i) => i <= magicIngre2 && i >= magicIngre1);
     }
+    const magicDrink1 = (Object.keys(recipeDetail.drinks[0]).indexOf('strIngredient1'));
+    const magicDrink2 = (Object.keys(recipeDetail.drinks[0]).indexOf('strIngredient15'));
     return Object.values(recipeDetail.drinks[0])
-      .filter((a, i) => i < magicDrink2 && i > magicDrink1);
+      .filter((a, i) => i <= magicDrink2 && i >= magicDrink1);
   };
 
   const measure = () => {
-    const magicIngre1 = 28;
-    const magicIngre2 = 49;
-    const magicDrink1 = 31;
-    const magicDrink2 = 47;
     if (splited[1] === 'foods') {
+      const magicIngre1 = (Object.keys(recipeDetail.meals[0]).indexOf('strMeasure1'));
+      const magicIngre2 = (Object.keys(recipeDetail.meals[0]).indexOf('strMeasure20'));
       return Object.values(recipeDetail.meals[0])
-        .filter((a, i) => i < magicIngre2 && i > magicIngre1);
+        .filter((a, i) => i <= magicIngre2 && i >= magicIngre1);
     }
+    const magicDrink1 = (Object.keys(recipeDetail.drinks[0]).indexOf('strMeasure1'));
+    const magicDrink2 = (Object.keys(recipeDetail.drinks[0]).indexOf('strMeasure15'));
     return Object.values(recipeDetail.drinks[0])
-      .filter((a, i) => i < magicDrink2 && i > magicDrink1);
+      .filter((a, i) => i <= magicDrink2 && i >= magicDrink1);
   };
   const ingredientes = ingredient().filter((a) => a !== null && a !== '');
   const medidas = measure().filter((a) => a !== null && a !== '');
