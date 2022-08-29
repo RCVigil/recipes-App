@@ -8,6 +8,8 @@ function StartButton() {
   const style = {
     position: 'fixed',
     bottom: '0px',
+    left: '200px',
+    // margin: '100px, 0,0, 200px',
   };
   const { pathname } = history.location;
   const splited = pathname.split('/');

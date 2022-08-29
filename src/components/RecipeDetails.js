@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import clipboardCopy from 'clipboard-copy';
 import receitasContext from '../Context/ReceitasContext';
 import '../App.css';
 import StartButton from './StartButton';
@@ -10,6 +11,11 @@ export default function RecipeDetails() {
   const { pathname } = history.location;
   const splited = pathname.split('/');
   const numCarros = 6;
+  const [share, setShare] = useState(false);
+  const style = {
+    margin: '0,0,20px,0',
+    padding: '30px',
+  };
 
   const ingredient = () => {
     if (splited[1] === 'foods') {
@@ -60,6 +66,12 @@ export default function RecipeDetails() {
   };
   const ingredientes = ingredient().filter((a) => a !== null && a !== '');
   const medidas = measure().filter((a) => a !== null && a !== '');
+
+  const shareClick = () => {
+    clipboardCopy(`http://localhost:3000${pathname}`);
+    setShare(true);
+  };
+
   useEffect(() => {
     const indication = () => {
       if (splited[1] === 'foods') {
@@ -70,6 +82,7 @@ export default function RecipeDetails() {
     };
     indication();
     console.log(JSON.parse(localStorage.getItem('doneRecipes')));
+    console.log(JSON.parse(localStorage.getItem('inProgressRecipes')));
   }, []);
 
   return (
@@ -132,6 +145,8 @@ export default function RecipeDetails() {
           <button
             type="button"
             data-testid="share-btn"
+            onClick={ shareClick }
+            style={ style }
           >
             Compartilhar
           </button>
@@ -141,6 +156,7 @@ export default function RecipeDetails() {
           >
             Favoritar
           </button>
+          { share && <p>Link copied!</p> }
         </div>
       ) : (
         <div>
@@ -194,6 +210,8 @@ export default function RecipeDetails() {
           <button
             type="button"
             data-testid="share-btn"
+            onClick={ shareClick }
+            style={ style }
           >
             Compartilhar
           </button>
@@ -203,6 +221,7 @@ export default function RecipeDetails() {
           >
             Favoritar
           </button>
+          { share && <p>Link copied!</p> }
         </div>
       )}
     </div>
