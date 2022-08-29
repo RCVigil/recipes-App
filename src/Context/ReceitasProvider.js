@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import receitasContext from './ReceitasContext';
 
@@ -31,6 +31,13 @@ const ReceitasProvider = ({ children }) => {
     recipeDetail,
     setRecipeDetail,
   };
+
+  useEffect(() => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify([]));
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }, []);
+
   return (
     <receitasContext.Provider
       value={ revcontext }

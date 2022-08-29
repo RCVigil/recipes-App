@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import receitasContext from '../Context/ReceitasContext';
 import '../App.css';
+import StartButton from './StartButton';
 
 export default function RecipeDetails() {
   const { recipeDetail, getMeals, getDrinks, recipes } = useContext(receitasContext);
@@ -9,11 +10,6 @@ export default function RecipeDetails() {
   const { pathname } = history.location;
   const splited = pathname.split('/');
   const numCarros = 6;
-
-  const style = {
-    position: 'fixed',
-    bottom: '0px',
-  };
 
   const ingredient = () => {
     if (splited[1] === 'foods') {
@@ -73,6 +69,7 @@ export default function RecipeDetails() {
       }
     };
     indication();
+    console.log(JSON.parse(localStorage.getItem('doneRecipes')));
   }, []);
 
   return (
@@ -128,16 +125,10 @@ export default function RecipeDetails() {
                 ))}
             </div>
           )}
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            style={ style }
-            onClick={ () => (
-              history.push(`/foods/${recipeDetail.meals[0].idMeal}/in-progress`)
-            ) }
-          >
-            Start Recipe
-          </button>
+          {!(JSON.parse(localStorage.getItem('doneRecipes'))
+            .some((a) => a.id === recipeDetail.meals[0].idMeal))
+          && (
+            <StartButton />)}
           <button
             type="button"
             data-testid="share-btn"
@@ -196,16 +187,10 @@ export default function RecipeDetails() {
                 ))}
             </div>
           )}
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            style={ style }
-            onClick={ () => (
-              history.push(`/drinks/${recipeDetail.drinks[0].idDrink}/in-progress`)
-            ) }
-          >
-            Start Recipe
-          </button>
+          { !(JSON.parse(localStorage.getItem('doneRecipes'))
+            .some((a) => a.id === recipeDetail.drinks[0].idDrink))
+          && (
+            <StartButton />)}
           <button
             type="button"
             data-testid="share-btn"
