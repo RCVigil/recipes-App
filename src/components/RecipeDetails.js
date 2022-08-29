@@ -4,6 +4,7 @@ import clipboardCopy from 'clipboard-copy';
 import receitasContext from '../Context/ReceitasContext';
 import '../App.css';
 import StartButton from './StartButton';
+import favoriteRecipes from './util/favoriteRecipes';
 
 export default function RecipeDetails() {
   const { recipeDetail, getMeals, getDrinks, recipes } = useContext(receitasContext);
@@ -153,6 +154,13 @@ export default function RecipeDetails() {
           <button
             type="button"
             data-testid="favorite-btn"
+            onClick={ () => favoriteRecipes({ id: recipeDetail.meals[0].idMeal,
+              type: 'food',
+              nationality: recipeDetail.meals[0].strArea,
+              category: recipeDetail.meals[0].strCategory,
+              alcoholicOrNot: '',
+              name: recipeDetail.meals[0].strMeal,
+              image: recipeDetail.meals[0].strMealThumb }) }
           >
             Favoritar
           </button>
@@ -218,6 +226,13 @@ export default function RecipeDetails() {
           <button
             type="button"
             data-testid="favorite-btn"
+            onClick={ () => favoriteRecipes({ id: recipeDetail.drinks[0].idDrink,
+              type: 'drink',
+              nationality: '',
+              category: recipeDetail.drinks[0].strCategory,
+              alcoholicOrNot: recipeDetail.drinks[0].strAlcoholic,
+              name: recipeDetail.drinks[0].strDrink,
+              image: recipeDetail.drinks[0].strDrinkThumb }) }
           >
             Favoritar
           </button>
