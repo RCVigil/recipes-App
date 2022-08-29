@@ -5,6 +5,8 @@ import receitasContext from '../Context/ReceitasContext';
 import '../App.css';
 import StartButton from './StartButton';
 import favoriteRecipes from './util/favoriteRecipes';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function RecipeDetails() {
   const { recipeDetail, getMeals, getDrinks, recipes } = useContext(receitasContext);
@@ -71,6 +73,15 @@ export default function RecipeDetails() {
   const shareClick = () => {
     clipboardCopy(`http://localhost:3000${pathname}`);
     setShare(true);
+  };
+
+  const heartClick = () => {
+    if (JSON.parse(localStorage.getItem('favoriteRecipes'))
+      .some((a) => a.id === recipeDetail.meals[0].idMeal
+      || recipeDetail.drinks[0].idDrink)) {
+      return blackHeartIcon;
+    }
+    return whiteHeartIcon;
   };
 
   useEffect(() => {
@@ -151,9 +162,11 @@ export default function RecipeDetails() {
           >
             Compartilhar
           </button>
-          <button
-            type="button"
+          <input
+            type="image"
+            alt=""
             data-testid="favorite-btn"
+            src={ heartClick() }
             onClick={ () => favoriteRecipes({ id: recipeDetail.meals[0].idMeal,
               type: 'food',
               nationality: recipeDetail.meals[0].strArea,
@@ -161,9 +174,7 @@ export default function RecipeDetails() {
               alcoholicOrNot: '',
               name: recipeDetail.meals[0].strMeal,
               image: recipeDetail.meals[0].strMealThumb }) }
-          >
-            Favoritar
-          </button>
+          />
           { share && <p>Link copied!</p> }
         </div>
       ) : (
@@ -223,9 +234,11 @@ export default function RecipeDetails() {
           >
             Compartilhar
           </button>
-          <button
-            type="button"
+          <input
+            type="image"
+            alt=""
             data-testid="favorite-btn"
+            src={ heartClick() }
             onClick={ () => favoriteRecipes({ id: recipeDetail.drinks[0].idDrink,
               type: 'drink',
               nationality: '',
@@ -233,9 +246,7 @@ export default function RecipeDetails() {
               alcoholicOrNot: recipeDetail.drinks[0].strAlcoholic,
               name: recipeDetail.drinks[0].strDrink,
               image: recipeDetail.drinks[0].strDrinkThumb }) }
-          >
-            Favoritar
-          </button>
+          />
           { share && <p>Link copied!</p> }
         </div>
       )}
