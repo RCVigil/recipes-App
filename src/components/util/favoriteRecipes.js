@@ -1,6 +1,6 @@
-const favoriteRecipes = ({ id,
+export const favoriteRecipes = ({ id,
   type, nationality, category, alcoholicOrNot, name, image }) => {
-  const recipesFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const recipesFav = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
   const recipesFav2 = [...recipesFav, { id,
     type,
     nationality,
@@ -11,4 +11,8 @@ const favoriteRecipes = ({ id,
   localStorage.setItem('favoriteRecipes', JSON.stringify(recipesFav2));
 };
 
-export default favoriteRecipes;
+export const desFavoriteRecipes = ({ id }) => {
+  const recipesFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const recipesFav2 = recipesFav.filter((a) => a.id !== id);
+  localStorage.setItem('favoriteRecipes', JSON.stringify(recipesFav2));
+};

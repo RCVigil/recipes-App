@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-// import Footer from '../components/Footer';
 import RecipeDetail from '../components/RecipeDetails';
 import receitasContext from '../Context/ReceitasContext';
 

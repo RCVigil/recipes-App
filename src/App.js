@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
@@ -12,11 +12,10 @@ import DrinkDetails from './pages/DrinkDetails';
 import RecipeInProgress from './pages/RecipeInProgress';
 
 function App() {
-  useEffect(() => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify([]));
-    localStorage.setItem('doneRecipes', JSON.stringify([]));
-    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-  }, []);
+  // useEffect(() => {
+  //   localStorage.setItem('doneRecipes', JSON.stringify([]));
+  //   localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  // }, []);
   return (
     <div className="meals">
       <span className="logo">TRYBE</span>
