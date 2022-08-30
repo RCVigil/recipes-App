@@ -31,6 +31,7 @@ const ReceitasProvider = ({ children }) => {
     recipeDetail,
     setRecipeDetail,
   };
+
   return (
     <receitasContext.Provider
       value={ revcontext }
