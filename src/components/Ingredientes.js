@@ -61,6 +61,7 @@ function Ingredientes() {
       {ingredientes.map((a, i) => (
         <li key={ i } data-testid={ `${i}-ingredient-step` }>
           {`${a} ${medidas[i]}`}
+          <input type="checkbox" />
         </li>
       ))}
     </ul>);
