@@ -12,6 +12,10 @@ import DrinkDetails from './pages/DrinkDetails';
 import RecipeInProgress from './pages/RecipeInProgress';
 
 function App() {
+  // useEffect(() => {
+  //   localStorage.setItem('doneRecipes', JSON.stringify([]));
+  //   localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  // }, []);
   return (
     <div className="meals">
       <span className="logo">TRYBE</span>
