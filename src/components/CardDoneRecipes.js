@@ -20,7 +20,7 @@ function CardDoneRecipes() {
           {a.tags.map((ele, index) => (
             <p
               key={ index }
-              data-testid={ `${index}-${ele}-horizontal-tag` }
+              data-testid={ `${i}-${ele}-horizontal-tag` }
             >
               {ele}
             </p>))}
