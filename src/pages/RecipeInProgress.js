@@ -46,6 +46,10 @@ function RecipeInProgress() {
     }
   };
 
+  const finishRecipDone = () => {
+    history.push('/done-recipes');
+  };
+
   useEffect(() => {
     getFoodDetail();
     const local = () => {
@@ -106,7 +110,7 @@ function RecipeInProgress() {
               type="button"
               data-testid="finish-recipe-btn"
               disabled={ disabledOn }
-              onClick={ () => {} }
+              onClick={ finishRecipDone }
             >
               Finish Recipes
             </button>
@@ -135,7 +139,7 @@ function RecipeInProgress() {
               type="button"
               data-testid="finish-recipe-btn"
               disabled={ disabledOn }
-              onClick={ () => {} }
+              onClick={ finishRecipDone }
             >
               Finish Recipes
             </button>
