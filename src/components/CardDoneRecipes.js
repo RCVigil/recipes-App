@@ -19,9 +19,22 @@ function CardDoneRecipes() {
             src={ a.image }
             alt=""
           />
-          <p data-testid={ `${i}-horizontal-top-text` }>
-            {`${a.nationality} - ${a.category}`}
-          </p>
+          {a.type === 'food'
+            ? (
+              <p
+                data-testid={ `${i}-horizontal-top-text` }
+              >
+                {`${a.nationality} - ${a.category}`}
+
+              </p>)
+            : (
+              <p
+                data-testid={ `${i}-horizontal-top-text` }
+              >
+                {`${a.alcoholicOrNot}`}
+
+              </p>) }
+
           <p data-testid={ `${i}-horizontal-name` }>{a.name}</p>
           <p data-testid={ `${i}-horizontal-done-date` }>{a.doneDate}</p>
           <input
