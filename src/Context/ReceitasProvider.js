@@ -6,6 +6,8 @@ const ReceitasProvider = ({ children }) => {
   const [category, setCategory] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [recipeDetail, setRecipeDetail] = useState([]);
+  const [ingredientsRec, setIngredientsRec] = useState([]);
+  const [locBase, setLocBase] = useState([]);
 
   const getMeals = async () => {
     const responseApi = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
@@ -30,6 +32,10 @@ const ReceitasProvider = ({ children }) => {
     getDrinks,
     recipeDetail,
     setRecipeDetail,
+    ingredientsRec,
+    setIngredientsRec,
+    locBase,
+    setLocBase,
   };
 
   return (
