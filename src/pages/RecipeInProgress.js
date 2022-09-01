@@ -1,14 +1,52 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
+import clipboardCopy from 'clipboard-copy';
 import { useHistory } from 'react-router-dom';
 import '../App.css';
 import Ingredientes from '../components/Ingredientes';
+import { favoriteRecipes, desFavoriteRecipes } from '../components/util/favoriteRecipes';
 import receitasContext from '../Context/ReceitasContext';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function RecipeInProgress() {
   const { recipeDetail, setRecipeDetail } = useContext(receitasContext);
+  const [share, setShare] = useState(false);
   const history = useHistory();
   const { pathname } = history.location;
   const splited = pathname.split('/');
+  const [fav, setFav] = useState(false);
+
+  const heartClick = () => {
+    if (splited[1] === 'foods' && !fav) {
+      favoriteRecipes({ id: recipeDetail.meals[0].idMeal,
+        type: 'food',
+        nationality: recipeDetail.meals[0].strArea,
+        category: recipeDetail.meals[0].strCategory,
+        alcoholicOrNot: '',
+        name: recipeDetail.meals[0].strMeal,
+        image: recipeDetail.meals[0].strMealThumb });
+      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
+        .some((a) => a.id === recipeDetail.meals[0].idMeal));
+    } else if (splited[1] === 'drinks' && !fav) {
+      favoriteRecipes({ id: recipeDetail.drinks[0].idDrink,
+        type: 'drink',
+        nationality: '',
+        category: recipeDetail.drinks[0].strCategory,
+        alcoholicOrNot: recipeDetail.drinks[0].strAlcoholic,
+        name: recipeDetail.drinks[0].strDrink,
+        image: recipeDetail.drinks[0].strDrinkThumb });
+      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
+        .some((a) => a.id === recipeDetail.drinks[0].idDrink));
+    } else if (splited[1] === 'foods' && fav) {
+      desFavoriteRecipes({ id: recipeDetail.meals[0].idMeal });
+      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
+        .some((a) => a.id === recipeDetail.meals[0].idMeal));
+    } else {
+      desFavoriteRecipes({ id: recipeDetail.drinks[0].idDrink });
+      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
+        .some((a) => a.id === recipeDetail.drinks[0].idDrink));
+    }
+  };
 
   const getFoodDetail = async () => {
     if (splited[1] === 'foods') {
@@ -22,8 +60,26 @@ function RecipeInProgress() {
     }
   };
 
+  const shareClick = () => {
+    clipboardCopy(`http://localhost:3000/${splited[1]}/${splited[2]}`);
+    setShare(true);
+  };
+
   useEffect(() => {
     getFoodDetail();
+    const local = () => {
+      if (localStorage.getItem('favoriteRecipes') !== null
+        && splited[1] === 'foods') {
+        setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
+          .some((a) => a.id === splited[2]));
+      }
+      if (localStorage.getItem('favoriteRecipes') !== null
+        && splited[1] === 'drinks') {
+        setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
+          .some((a) => a.id === splited[2]));
+      }
+    };
+    local();
   }, []);
 
   return (
@@ -42,15 +98,18 @@ function RecipeInProgress() {
             <button
               type="button"
               data-testid="share-btn"
+              onClick={ shareClick }
             >
               Compartilhar
             </button>
-            <button
-              type="button"
+            <input
               data-testid="favorite-btn"
-            >
-              Favoritar
-            </button>
+              type="image"
+              alt=""
+              src={ fav ? blackHeartIcon : whiteHeartIcon }
+              onClick={ () => heartClick() }
+            />
+            { share && <p>Link copied!</p> }
             <h4 data-testid="recipe-category">
               {recipeDetail.meals[0].strCategory}
             </h4>
@@ -97,15 +156,18 @@ function RecipeInProgress() {
             <button
               type="button"
               data-testid="share-btn"
+              onClick={ shareClick }
             >
               Compartilhar
             </button>
-            <button
-              type="button"
+            <input
+              type="image"
+              alt=""
               data-testid="favorite-btn"
-            >
-              Favoritar
-            </button>
+              src={ fav ? blackHeartIcon : whiteHeartIcon }
+              onClick={ () => heartClick() }
+            />
+            { share && <p>Link copied!</p> }
           </div>)
       )}
     </div>
