@@ -9,12 +9,19 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function RecipeInProgress() {
-  const { recipeDetail, setRecipeDetail } = useContext(receitasContext);
+  const {
+    recipeDetail,
+    setRecipeDetail,
+    ingredientsRec,
+    locBase } = useContext(receitasContext);
   const [share, setShare] = useState(false);
   const history = useHistory();
   const { pathname } = history.location;
   const splited = pathname.split('/');
   const [fav, setFav] = useState(false);
+  const [disabledOn, setDisabledOn] = useState(true);
+
+  const ingredientsLength = ingredientsRec.length;
 
   const heartClick = () => {
     if (splited[1] === 'foods' && !fav) {
@@ -65,6 +72,12 @@ function RecipeInProgress() {
     setShare(true);
   };
 
+  const finishClick = () => {
+    if (locBase.length === ingredientsLength && locBase.length > 0) {
+      setDisabledOn(false);
+    }
+  };
+
   useEffect(() => {
     getFoodDetail();
     const local = () => {
@@ -79,8 +92,9 @@ function RecipeInProgress() {
           .some((a) => a.id === splited[2]));
       }
     };
+    finishClick();
     local();
-  }, []);
+  }, [ingredientsRec, locBase]);
 
   return (
     <div>
@@ -123,6 +137,8 @@ function RecipeInProgress() {
             <button
               type="button"
               data-testid="finish-recipe-btn"
+              disabled={ disabledOn }
+              onClick={ () => {} }
             >
               Finish Recipes
             </button>
@@ -150,6 +166,8 @@ function RecipeInProgress() {
             <button
               type="button"
               data-testid="finish-recipe-btn"
+              disabled={ disabledOn }
+              onClick={ () => {} }
             >
               Finish Recipes
             </button>
