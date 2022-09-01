@@ -3,7 +3,7 @@ import clipboardCopy from 'clipboard-copy';
 import { useHistory } from 'react-router-dom';
 import '../App.css';
 import Ingredientes from '../components/Ingredientes';
-import { favoriteRecipes, desFavoriteRecipes } from '../components/util/favoriteRecipes';
+import heartClick from './funcs/heartClick';
 import receitasContext from '../Context/ReceitasContext';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -15,38 +15,6 @@ function RecipeInProgress() {
   const { pathname } = history.location;
   const splited = pathname.split('/');
   const [fav, setFav] = useState(false);
-
-  const heartClick = () => {
-    if (splited[1] === 'foods' && !fav) {
-      favoriteRecipes({ id: recipeDetail.meals[0].idMeal,
-        type: 'food',
-        nationality: recipeDetail.meals[0].strArea,
-        category: recipeDetail.meals[0].strCategory,
-        alcoholicOrNot: '',
-        name: recipeDetail.meals[0].strMeal,
-        image: recipeDetail.meals[0].strMealThumb });
-      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
-        .some((a) => a.id === recipeDetail.meals[0].idMeal));
-    } else if (splited[1] === 'drinks' && !fav) {
-      favoriteRecipes({ id: recipeDetail.drinks[0].idDrink,
-        type: 'drink',
-        nationality: '',
-        category: recipeDetail.drinks[0].strCategory,
-        alcoholicOrNot: recipeDetail.drinks[0].strAlcoholic,
-        name: recipeDetail.drinks[0].strDrink,
-        image: recipeDetail.drinks[0].strDrinkThumb });
-      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
-        .some((a) => a.id === recipeDetail.drinks[0].idDrink));
-    } else if (splited[1] === 'foods' && fav) {
-      desFavoriteRecipes({ id: recipeDetail.meals[0].idMeal });
-      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
-        .some((a) => a.id === recipeDetail.meals[0].idMeal));
-    } else {
-      desFavoriteRecipes({ id: recipeDetail.drinks[0].idDrink });
-      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
-        .some((a) => a.id === recipeDetail.drinks[0].idDrink));
-    }
-  };
 
   const getFoodDetail = async () => {
     if (splited[1] === 'foods') {
@@ -107,7 +75,7 @@ function RecipeInProgress() {
               type="image"
               alt=""
               src={ fav ? blackHeartIcon : whiteHeartIcon }
-              onClick={ () => heartClick() }
+              onClick={ () => heartClick(recipeDetail, splited, fav, setFav) }
             />
             { share && <p>Link copied!</p> }
             <h4 data-testid="recipe-category">
@@ -165,7 +133,7 @@ function RecipeInProgress() {
               alt=""
               data-testid="favorite-btn"
               src={ fav ? blackHeartIcon : whiteHeartIcon }
-              onClick={ () => heartClick() }
+              onClick={ () => heartClick(recipeDetail, splited, fav, setFav) }
             />
             { share && <p>Link copied!</p> }
           </div>)

@@ -1,5 +1,5 @@
 import React from "react";
-import { screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from '@testing-library/user-event'
 import renderWithRouter from './utils/renderWIthRouter'
 import meals from "../../cypress/mocks/meals";
