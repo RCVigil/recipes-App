@@ -11,7 +11,6 @@ function Drinks() {
     const getCategories = async () => {
       const responseApi = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
       const dataApi = await responseApi.json();
-      console.log(dataApi);
       setCategory(dataApi);
     };
 

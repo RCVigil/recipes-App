@@ -8,18 +8,18 @@ const ReceitasProvider = ({ children }) => {
   const [recipeDetail, setRecipeDetail] = useState([]);
   const [ingredientsRec, setIngredientsRec] = useState([]);
   const [locBase, setLocBase] = useState([]);
+  const [favoriteDrinks, setFavoriteDrinks] = useState([]);
+  const [favoriteFoods, setFavoriteFoods] = useState([]);
 
   const getMeals = async () => {
     const responseApi = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     const dataApi = await responseApi.json();
-    console.log(dataApi);
     setRecipes(dataApi);
   };
 
   const getDrinks = async () => {
     const responseApi = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
     const dataApi = await responseApi.json();
-    console.log(dataApi);
     setRecipes(dataApi);
   };
 
@@ -36,6 +36,10 @@ const ReceitasProvider = ({ children }) => {
     setIngredientsRec,
     locBase,
     setLocBase,
+    favoriteDrinks,
+    setFavoriteDrinks,
+    favoriteFoods,
+    setFavoriteFoods,
   };
 
   return (

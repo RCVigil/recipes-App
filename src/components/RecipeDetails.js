@@ -125,7 +125,6 @@ export default function RecipeDetails() {
     };
     indication();
     local();
-    console.log(localStorage.getItem('doneRecipes'));
   }, []);
 
   return (
