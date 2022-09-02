@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
 import receitasContext from '../Context/ReceitasContext';
-import { favoriteRecipes, desFavoriteRecipes } from '../components/util/favoriteRecipes';
-import CardDoneRecipes from '../components/CardDoneRecipes';
+import { favoriteRecipes } from '../components/util/favoriteRecipes';
 import CardFavoritRecip from '../components/CardFavoritRecip';
 
 function FavoriteRecipes() {

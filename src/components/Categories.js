@@ -24,7 +24,6 @@ export default function Categories() {
     if (categoryState) {
       const responseApi = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${elemF}`);
       const dataApi = await responseApi.json();
-      console.log(dataApi);
       setRecipes(dataApi);
     } else {
       getMeals();
@@ -36,7 +35,6 @@ export default function Categories() {
     if (categoryState) {
       const responseApi = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${elemF}`);
       const dataApi = await responseApi.json();
-      console.log(dataApi);
       setRecipes(dataApi);
     } else {
       getDrinks();

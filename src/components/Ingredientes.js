@@ -62,12 +62,10 @@ function Ingredientes() {
   const checkDisab = () => {
     const localBas = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (localBas !== null && splited[1] === 'foods') {
-      console.log('LocalBas é:   ', localBas);
       const baseLength = (localBas.meals[splited[2]]);
       setLocBase(baseLength);
     }
     if (localBas !== null && splited[1] === 'drinks') {
-      console.log('LocalBas é:   ', localBas);
       const baseLength = (localBas.cocktails[splited[2]]);
       setLocBase(baseLength);
     }
@@ -111,7 +109,6 @@ function Ingredientes() {
         meals: {} };
       const inProgress2 = inProgress.cocktails[splited[2]]
         ? [...inProgress.cocktails[splited[2]], a] : [a];
-      console.log(inProgress2);
       const newLocal = { meals: { ...inProgress.meals },
         cocktails:
       { ...inProgress.cocktails,
