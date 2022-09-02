@@ -4,7 +4,7 @@ import clipboardCopy from 'clipboard-copy';
 import receitasContext from '../Context/ReceitasContext';
 import '../App.css';
 import StartButton from './StartButton';
-import { favoriteRecipes, desFavoriteRecipes } from './util/favoriteRecipes';
+import heartClick from '../pages/funcs/heartClick';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
@@ -69,38 +69,6 @@ export default function RecipeDetails() {
   const shareClick = () => {
     clipboardCopy(`http://localhost:3000${pathname}`);
     setShare(true);
-  };
-
-  const heartClick = () => {
-    if (splited[1] === 'foods' && !fav) {
-      favoriteRecipes({ id: recipeDetail.meals[0].idMeal,
-        type: 'food',
-        nationality: recipeDetail.meals[0].strArea,
-        category: recipeDetail.meals[0].strCategory,
-        alcoholicOrNot: '',
-        name: recipeDetail.meals[0].strMeal,
-        image: recipeDetail.meals[0].strMealThumb });
-      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
-        .some((a) => a.id === recipeDetail.meals[0].idMeal));
-    } else if (splited[1] === 'drinks' && !fav) {
-      favoriteRecipes({ id: recipeDetail.drinks[0].idDrink,
-        type: 'drink',
-        nationality: '',
-        category: recipeDetail.drinks[0].strCategory,
-        alcoholicOrNot: recipeDetail.drinks[0].strAlcoholic,
-        name: recipeDetail.drinks[0].strDrink,
-        image: recipeDetail.drinks[0].strDrinkThumb });
-      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
-        .some((a) => a.id === recipeDetail.drinks[0].idDrink));
-    } else if (splited[1] === 'foods' && fav) {
-      desFavoriteRecipes({ id: recipeDetail.meals[0].idMeal });
-      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
-        .some((a) => a.id === recipeDetail.meals[0].idMeal));
-    } else {
-      desFavoriteRecipes({ id: recipeDetail.drinks[0].idDrink });
-      setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
-        .some((a) => a.id === recipeDetail.drinks[0].idDrink));
-    }
   };
 
   useEffect(() => {
@@ -182,7 +150,7 @@ export default function RecipeDetails() {
             alt=""
             data-testid="favorite-btn"
             src={ fav ? blackHeartIcon : whiteHeartIcon }
-            onClick={ () => heartClick() }
+            onClick={ () => heartClick(recipeDetail, splited, fav, setFav) }
           />
           { share && <p>Link copied!</p> }
         </div>
@@ -240,7 +208,7 @@ export default function RecipeDetails() {
             alt=""
             data-testid="favorite-btn"
             src={ fav ? blackHeartIcon : whiteHeartIcon }
-            onClick={ () => heartClick() }
+            onClick={ () => heartClick(recipeDetail, splited, fav, setFav) }
           />
           { share && <p>Link copied!</p> }
         </div>)}

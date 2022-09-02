@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
 import receitasContext from '../Context/ReceitasContext';
 import { favoriteRecipes, desFavoriteRecipes } from '../components/util/favoriteRecipes';
+import CardDoneRecipes from '../components/CardDoneRecipes';
+import CardFavoritRecip from '../components/CardFavoritRecip';
 
 function FavoriteRecipes() {
   const { favoriteFoods, favoriteDrinks } = useContext(receitasContext);
@@ -18,7 +20,14 @@ function FavoriteRecipes() {
 
   return (
     <div>
-      <Header />
+
+      <div>
+        <Header />
+        <button type="button" data-testid="filter-by-all-btn">All</button>
+        <button type="button" data-testid="filter-by-food-btn">Food</button>
+        <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+      </div>
+      <CardFavoritRecip />
     </div>
   );
 }
