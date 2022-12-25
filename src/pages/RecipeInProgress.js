@@ -8,12 +8,13 @@ import receitasContext from '../Context/ReceitasContext';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function RecipeInProgress() {
+const RecipeInProgress = () => {
   const {
     recipeDetail,
     setRecipeDetail,
     ingredientsRec,
-    locBase } = useContext(receitasContext);
+    locBase,
+  } = useContext(receitasContext);
   const [share, setShare] = useState(false);
   const history = useHistory();
   const { pathname } = history.location;
@@ -25,11 +26,15 @@ function RecipeInProgress() {
 
   const getFoodDetail = async () => {
     if (splited[1] === 'foods') {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${splited[2]}`);
+      const response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${splited[2]}`,
+      );
       const dataResponse = await response.json();
       setRecipeDetail(dataResponse);
     } else {
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${splited[2]}`);
+      const response = await fetch(
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${splited[2]}`,
+      );
       const dataResponse = await response.json();
       setRecipeDetail(dataResponse);
     }
@@ -53,15 +58,25 @@ function RecipeInProgress() {
   useEffect(() => {
     getFoodDetail();
     const local = () => {
-      if (localStorage.getItem('favoriteRecipes') !== null
-        && splited[1] === 'foods') {
-        setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
-          .some((a) => a.id === splited[2]));
+      if (
+        localStorage.getItem('favoriteRecipes') !== null
+        && splited[1] === 'foods'
+      ) {
+        setFav(
+          JSON.parse(localStorage.getItem('favoriteRecipes')).some(
+            (a) => a.id === splited[2],
+          ),
+        );
       }
-      if (localStorage.getItem('favoriteRecipes') !== null
-        && splited[1] === 'drinks') {
-        setFav(JSON.parse(localStorage.getItem('favoriteRecipes'))
-          .some((a) => a.id === splited[2]));
+      if (
+        localStorage.getItem('favoriteRecipes') !== null
+        && splited[1] === 'drinks'
+      ) {
+        setFav(
+          JSON.parse(localStorage.getItem('favoriteRecipes')).some(
+            (a) => a.id === splited[2],
+          ),
+        );
       }
     };
     finishClick();
@@ -71,8 +86,8 @@ function RecipeInProgress() {
   return (
     <div>
       <h1>RecipeInProgress</h1>
-      {splited[1] === 'foods' ? (
-        recipeDetail.meals && (
+      {splited[1] === 'foods'
+        ? recipeDetail.meals && (
           <div>
             <img
               data-testid="recipe-photo"
@@ -80,7 +95,9 @@ function RecipeInProgress() {
               width="400px"
               alt=""
             />
-            <h2 data-testid="recipe-title">{recipeDetail.meals[0].strMeal}</h2>
+            <h2 data-testid="recipe-title">
+              {recipeDetail.meals[0].strMeal}
+            </h2>
             <button
               type="button"
               data-testid="share-btn"
@@ -95,12 +112,12 @@ function RecipeInProgress() {
               src={ fav ? blackHeartIcon : whiteHeartIcon }
               onClick={ () => heartClick(recipeDetail, splited, fav, setFav) }
             />
-            { share && <p>Link copied!</p> }
+            {share && <p>Link copied!</p>}
             <h4 data-testid="recipe-category">
               {recipeDetail.meals[0].strCategory}
             </h4>
 
-            { recipeDetail.meals && <Ingredientes />}
+            {recipeDetail.meals && <Ingredientes />}
 
             <h5 data-testid="instructions">
               {recipeDetail.meals[0].strInstructions}
@@ -116,9 +133,7 @@ function RecipeInProgress() {
             </button>
           </div>
         )
-      ) : (
-        recipeDetail.drinks && (
-
+        : recipeDetail.drinks && (
           <div>
             <img
               data-testid="recipe-photo"
@@ -126,11 +141,13 @@ function RecipeInProgress() {
               width="400px"
               alt=""
             />
-            <h2 data-testid="recipe-title">{recipeDetail.drinks[0].strDrink}</h2>
+            <h2 data-testid="recipe-title">
+              {recipeDetail.drinks[0].strDrink}
+            </h2>
             <h4 data-testid="recipe-category">
               {recipeDetail.drinks[0].strCategory}
             </h4>
-            { recipeDetail.drinks && <Ingredientes />}
+            {recipeDetail.drinks && <Ingredientes />}
             <h5 data-testid="instructions">
               {recipeDetail.drinks[0].strInstructions}
             </h5>
@@ -157,11 +174,11 @@ function RecipeInProgress() {
               src={ fav ? blackHeartIcon : whiteHeartIcon }
               onClick={ () => heartClick(recipeDetail, splited, fav, setFav) }
             />
-            { share && <p>Link copied!</p> }
-          </div>)
-      )}
+            {share && <p>Link copied!</p>}
+          </div>
+        )}
     </div>
   );
-}
+};
 
 export default RecipeInProgress;

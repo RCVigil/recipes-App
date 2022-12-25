@@ -62,58 +62,66 @@ function Ingredientes() {
   const checkDisab = () => {
     const localBas = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (localBas !== null && splited[1] === 'foods') {
-      const baseLength = (localBas.meals[splited[2]]);
+      const baseLength = localBas.meals[splited[2]];
       setLocBase(baseLength);
     }
     if (localBas !== null && splited[1] === 'drinks') {
-      const baseLength = (localBas.cocktails[splited[2]]);
+      const baseLength = localBas.cocktails[splited[2]];
       setLocBase(baseLength);
     }
   };
 
   const checked = (i) => {
-    if (localStorage.getItem('inProgressRecipes') !== null && splited[1] === 'foods') {
+    if (
+      localStorage.getItem('inProgressRecipes') !== null
+      && splited[1] === 'foods'
+    ) {
       const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
       // checkDisab();
       return inProgress.meals[splited[2]]
-        ? inProgress.meals[splited[2]].some((a) => a === i) : false;
+        ? inProgress.meals[splited[2]].some((a) => a === i)
+        : false;
     }
-    if (localStorage.getItem('inProgressRecipes') !== null && splited[1] === 'drinks') {
+    if (
+      localStorage.getItem('inProgressRecipes') !== null
+      && splited[1] === 'drinks'
+    ) {
       const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
       // checkDisab();
       return inProgress.cocktails[splited[2]]
-        ? inProgress.cocktails[splited[2]].some((a) => a === i) : false;
+        ? inProgress.cocktails[splited[2]].some((a) => a === i)
+        : false;
     }
   };
 
   const handleCheck = (ev, a) => {
     if (ev.target.checked && splited[1] === 'foods') {
-      const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'))
-      || { cocktails: {},
-        meals: {} };
+      const inProgress = JSON.parse(
+        localStorage.getItem('inProgressRecipes'),
+      ) || { cocktails: {}, meals: {} };
       const inProgress2 = inProgress.meals[splited[2]]
-        ? [...inProgress.meals[splited[2]], a] : [a];
-      const newLocal = { cocktails: { ...inProgress.cocktails },
-        meals:
-      { ...inProgress.meals,
-        [splited[2]]: inProgress2,
-      } };
+        ? [...inProgress.meals[splited[2]], a]
+        : [a];
+      const newLocal = {
+        cocktails: { ...inProgress.cocktails },
+        meals: { ...inProgress.meals, [splited[2]]: inProgress2 },
+      };
       localStorage.setItem('inProgressRecipes', JSON.stringify(newLocal));
       checked(a);
       checkDisab();
     }
 
     if (ev.target.checked && splited[1] === 'drinks') {
-      const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'))
-      || { cocktails: {},
-        meals: {} };
+      const inProgress = JSON.parse(
+        localStorage.getItem('inProgressRecipes'),
+      ) || { cocktails: {}, meals: {} };
       const inProgress2 = inProgress.cocktails[splited[2]]
-        ? [...inProgress.cocktails[splited[2]], a] : [a];
-      const newLocal = { meals: { ...inProgress.meals },
-        cocktails:
-      { ...inProgress.cocktails,
-        [splited[2]]: inProgress2,
-      } };
+        ? [...inProgress.cocktails[splited[2]], a]
+        : [a];
+      const newLocal = {
+        meals: { ...inProgress.meals },
+        cocktails: { ...inProgress.cocktails, [splited[2]]: inProgress2 },
+      };
       localStorage.setItem('inProgressRecipes', JSON.stringify(newLocal));
       checked(a);
       checkDisab();
@@ -138,7 +146,8 @@ function Ingredientes() {
           />
         </li>
       ))}
-    </ul>);
+    </ul>
+  );
 }
 
 export default Ingredientes;

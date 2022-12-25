@@ -8,7 +8,7 @@ import heartClick from '../pages/funcs/heartClick';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-export default function RecipeDetails() {
+const RecipeDetails = () => {
   const { recipeDetail, getMeals, getDrinks, recipes } = useContext(receitasContext);
   const history = useHistory();
   const { pathname } = history.location;
@@ -216,4 +216,6 @@ export default function RecipeDetails() {
           { share && <p>Link copied!</p> }
         </div>)}
     </div>);
-}
+};
+
+export default RecipeDetails;

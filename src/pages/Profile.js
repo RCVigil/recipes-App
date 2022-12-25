@@ -9,17 +9,15 @@ function Profile() {
   const getEmail = () => {
     const text = localStorage.getItem('user');
     const email = JSON.parse(text);
-    if (email !== null) { return email.email; }
+    if (email !== null) {
+      return email.email;
+    }
   };
 
   return (
     <div>
       <Header />
-      <h1
-        data-testid="profile-email"
-      >
-        {getEmail()}
-      </h1>
+      <h1 data-testid="profile-email">{getEmail()}</h1>
       <button
         type="button"
         data-testid="profile-logout-btn"
@@ -45,7 +43,8 @@ function Profile() {
         Favorite Recipes
       </button>
       <Footer />
-    </div>);
+    </div>
+  );
 }
 
 export default Profile;
