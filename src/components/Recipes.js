@@ -1,37 +1,36 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import receitasContext from '../Context/ReceitasContext';
+import '../pages/Pages.styles/Recipes.sass';
 
 export default function Recipes() {
   const { recipes } = useContext(receitasContext);
-  const style = {
-    flexWrap: 'wrap',
-    width: '5px',
-    display: 'flex',
-  };
 
   const num = 12;
 
   return (
-    <div>
+    <div className="divRecipes">
       {recipes.meals && recipes.meals.map((elem, index) => (
         index < num
           ? (
 
             <div
+              className="divRecipesFood"
               data-testid={ `${index}-recipe-card` }
               key={ index }
             >
               <Link
+                className="linkRecipes"
                 to={ `/foods/${elem.idMeal}` }
               >
                 <img
-                  style={ style }
+                  className="imgRecipes"
                   data-testid={ `${index}-card-img` }
                   src={ elem.strMealThumb }
                   alt=""
                 />
                 <p
+                  className="pRecipes"
                   data-testid={ `${index}-card-name` }
                 >
                   {elem.strMeal}
@@ -53,7 +52,6 @@ export default function Recipes() {
                 to={ `/drinks/${elem.idDrink}` }
               >
                 <img
-                  style={ style }
                   data-testid={ `${index}-card-img` }
                   src={ elem.strDrinkThumb }
                   alt=""

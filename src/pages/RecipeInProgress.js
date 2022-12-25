@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import clipboardCopy from 'clipboard-copy';
 import { useHistory } from 'react-router-dom';
-import '../App.css';
+import '../Sass/index.sass';
 import Ingredientes from '../components/Ingredientes';
 import heartClick from './funcs/heartClick';
 import receitasContext from '../Context/ReceitasContext';

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import '../Sass/index.sass';
+import './Pages.styles/login.sass';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -17,33 +19,54 @@ export default function Login() {
   const min = 7;
 
   return (
-    <div data-testid="divLogin">
-      <label htmlFor="email">
-        <input
-          type="email"
-          name="email"
-          data-testid="email-input"
-          placeholder="email@email.com"
-          onChange={ ({ target }) => setEmail(target.value) }
-        />
-
-        <input
-          type="password"
-          name="password"
-          data-testid="password-input"
-          placeholder="Password"
-          onChange={ ({ target }) => setPassword(target.value) }
-        />
-      </label>
-
-      <button
-        type="submit"
-        data-testid="login-submit-btn"
-        disabled={ !(password.length >= min && userEmail.test(email)) }
-        onClick={ clickSubmit }
+    <div
+      className="divFullLogin"
+      data-testid="divLogin"
+    >
+      <div
+        className="divLoginEP"
       >
-        Enter
-      </button>
+        <label
+          htmlFor="email"
+        >
+          <div className="divEmail">
+            <input
+              className="emailInput"
+              type="email"
+              id="email"
+              name="email"
+              required
+              data-testid="email-input"
+              placeholder="email@email.com"
+              onChange={ ({ target }) => setEmail(target.value) }
+            />
+          </div>
+
+          <div className="divPassw">
+            <input
+              className="passwInput"
+              type="password"
+              id="password"
+              name="password"
+              data-testid="password-input"
+              placeholder="Password"
+              onChange={ ({ target }) => setPassword(target.value) }
+            />
+          </div>
+        </label>
+      </div>
+
+      <div className="divLoginB">
+        <button
+          className="buttonLogin"
+          type="submit"
+          data-testid="login-submit-btn"
+          disabled={ !(password.length >= min && userEmail.test(email)) }
+          onClick={ clickSubmit }
+        >
+          Enter
+        </button>
+      </div>
     </div>
   );
 }

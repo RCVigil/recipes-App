@@ -1,0 +1,69 @@
+@import 'variables'
+
+body
+  background-color: $primary-bg
+  margin: 0
+  padding: 0
+  border: 0
+
+.meals 
+  align-content: center
+  align-items: center
+  display: flex
+  flex-direction: column
+  font-family: sans-serif
+  min-height: 94vh
+  justify-content: center
+  padding-bottom: 2rem
+  width: 99%
+
+.rocksGlass 
+  animation: shake 3s infinite ease
+  max-height: 80vh
+
+.meals
+  .logo
+    animation: shake 2.5s infinite ease
+    color: aliceblue
+    font-family: Montserrat sans-serif
+    font-size: 3em
+    font-weight: 900
+    margin-top: 2rem
+
+@keyframes shake
+
+  0%
+    transform: rotate(10deg)
+
+  50%
+    transform: rotate(-10deg)
+
+  100%
+    transform: rotate(10deg)
+
+@keyframes clink
+
+  0%
+    transform: rotate(-10deg)
+
+  50%
+    transform: rotate(20deg)
+
+  100%
+    transform: rotate(-10deg)
+
+.carrossel
+  display: flex
+  max-height: 200px
+  max-width: 250px
+  overflow-x: auto
+
+.carrosselItem
+  flex: none
+  margin: 10px
+  width: 50%
+
+.carrosselimg
+  height: 50px
+  object-fit: contain
+  width: 30px

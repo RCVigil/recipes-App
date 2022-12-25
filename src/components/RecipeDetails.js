@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import clipboardCopy from 'clipboard-copy';
 import receitasContext from '../Context/ReceitasContext';
-import '../App.css';
+import '../Sass/index.sass';
 import StartButton from './StartButton';
 import heartClick from '../pages/funcs/heartClick';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -20,6 +20,7 @@ export default function RecipeDetails() {
     margin: '0,0,20px,0',
     padding: '30px',
   };
+
   const ingredient = () => {
     if (splited[1] === 'foods') {
       const magicIngre1 = Object.keys(recipeDetail.meals[0]).indexOf(
@@ -42,6 +43,7 @@ export default function RecipeDetails() {
       (a, i) => i <= magicDrink2 && i >= magicDrink1,
     );
   };
+
   const measure = () => {
     if (splited[1] === 'foods') {
       const magicIngre1 = Object.keys(recipeDetail.meals[0]).indexOf(
@@ -64,6 +66,7 @@ export default function RecipeDetails() {
       (a, i) => i <= magicDrink2 && i >= magicDrink1,
     );
   };
+
   const ingredientes = ingredient().filter((a) => a !== null && a !== '');
   const medidas = measure().filter((a) => a !== null && a !== '');
   const shareClick = () => {

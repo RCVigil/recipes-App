@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
+import '../pages/Pages.styles/Header.sass';
 
 function Header() {
   const history = useHistory();
@@ -39,9 +40,19 @@ function Header() {
   };
 
   return (
-    <header>
-      <h2 data-testid="page-title">{titulo()}</h2>
-      <button type="button" onClick={ () => history.push('/profile') }>
+    <header className="divHeader">
+      <h2
+        className="h2Header"
+        data-testid="page-title"
+      >
+        {titulo()}
+
+      </h2>
+      <button
+        className="button1Header"
+        type="button"
+        onClick={ () => history.push('/profile') }
+      >
         <img
           src={ profileIcon }
           alt="profile-pic"
@@ -50,7 +61,11 @@ function Header() {
       </button>
       { searchShow()
           && (
-            <button type="button" onClick={ () => setSearchInput(!searchInput) }>
+            <button
+              className="button2Header"
+              type="button"
+              onClick={ () => setSearchInput(!searchInput) }
+            >
               <img
                 src={ searchIcon }
                 alt="search"

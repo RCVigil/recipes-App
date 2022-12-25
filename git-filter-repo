@@ -1,0 +1,39 @@
+# student-repo-publisher
+Scripts para limpeza e publicação de projetos feitos por estudantes da Trybe
+# Pré-requisitos
+A limpeza é feita usando a ferramenta [git-filter-repo](https://github.com/newren/git-filter-repo). Para instalá-la, execute:
+
+```bash
+$ git clone git@github.com:newren/git-filter-repo.git
+$ sudo mv git-filter-repo/git-filter-repo /usr/local/bin && rm -rf git-filter-repo
+```
+
+<!-- <><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+⚠️ Se aparecer gente com problema com /usr/local/bin fora do PATH, troque a segunda linha para:
+$ sudo mv git-filter-repo/git-filter-repo /usr/local/bin && rm -rf git-filter-repo && [[ ! ":$PATH:" == *":/usr/local/bin:"* ]] && export PATH="/usr/local/bin:$PATH"
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><> -->
+
+✔️ Para validar a instalação, execute o comando `git filter-repo`. Você deve receber a mensagem `No arguments specified.`.
+
+# Como rodar
+1. Crie um repositório vazio para o qual será enviado o projeto escolhido
+2. Acesse na sua máquina o diretório do projeto desenvolvido, e entre na branch trabalhada
+3. Garanta que não há _commits_ pendentes a serem feitos
+4. Insira o script **`publisher.sh`** na raiz do diretório.
+5. Entre na pasta `repo-filters-by-project`, encontre o script **`trybe-filter-repo.sh`** relativo ao projeto escolhido, e insira esse script na raiz do diretório.
+6. Execute o script **`publisher.sh`** informando o caminho SSH do repositório vazio criado no passo `1`:
+```bash
+bash publisher.sh git@github.com:<user_name>/<repo_name>.git
+```
+# Entendendo os scripts
+## Script `publisher.sh`
+**Esse é o script principal**, responsável por guiar a pessoa estudante através do processo de limpeza e publicação da sua branch como um novo repositório.
+Nesse script vamos:
+- Confirmar a intenção de continuar com a limpeza, informando os detalhes. Ex: "Tem certeza que deseja continuar? N/s";
+- Criar o `remote` com o parâmetro passado;
+- Utilizar o script `trybe-filter-repo.sh` para limpar os arquivos confidenciais do projeto;
+- Criar um novo README vazio, para ser preenchido posteriormente;
+- Fazer o _push_ para o novo `remote`.
+## Script `trybe-filter-repo.sh`
+Esse script fará apenas a limpeza dos arquivos e _commits_ relacionados a conteúdos mais sensíveis para a Trybe. Mais especificamente: testes que avaliam requisitos, `trybe.yml`, `.github/`, `.trybe/`, `README.md`, arquivos auxiliares, etc.
+⚠️ A lista completa desses arquivos será diferente para cada projeto. Na raiz deste repositório temos um exemplo genérico desse script, que deve ser utilizado apenas para fins de teste.

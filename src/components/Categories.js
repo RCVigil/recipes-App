@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import receitasContext from '../Context/ReceitasContext';
+import '../pages/Pages.styles/Categories.sass';
 
 export default function Categories() {
   const { category, setRecipes, getMeals, getDrinks } = useContext(receitasContext);
@@ -42,10 +43,11 @@ export default function Categories() {
   };
 
   return (
-    <div>
+    <div className="divFullCateg">
       {category.meals
         && category.meals.map((elem, index) => (index < num ? (
           <button
+            className="buttonCategories"
             data-testid={ `${elem.strCategory}-category-filter` }
             type="button"
             key={ index }
@@ -72,6 +74,7 @@ export default function Categories() {
         )))}
 
       <button
+        className="buttonCategories"
         type="button"
         data-testid="All-category-filter"
         onClick={ allOnClick }

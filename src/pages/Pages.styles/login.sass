@@ -1,0 +1,81 @@
+@import '../../Sass/_variables'
+
+// div do login
+.divFullLogin 
+  align-content: center
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap
+  height: 15rem
+  justify-content: center
+  width: 30rem
+
+// div do email e do password
+.divLoginEP
+  align-content: center
+  align-items: center
+  display: flex
+  height: 70%
+  justify-content: center
+  width: 70%
+
+  .divEmail
+    align-content: center
+    align-items: center
+    display: flex
+    height: 2rem
+    justify-content: center
+    padding: 0.5rem
+    width: 20rem
+
+    .emailInput
+      font-family: serif
+      border-radius: 7px 2px
+      height: 1.4rem
+      text-align: center
+
+    .emailInput:hover
+      background-color: $hover-inputs
+
+  .divPassw
+    align-content: center
+    align-items: center
+    display: flex
+    height: 2rem
+    justify-content: center
+    padding: 0.5rem
+    width: 20rem
+
+    .passwInput
+      border-radius: 7px 2px
+      font-family: serif
+      height: 1.4rem
+      text-align: center
+
+    .passwInput:hover
+      background-color: $hover-inputs
+
+// div do botao do login
+.divLoginB
+  align-content: center
+  align-items: center
+  display: flex
+  height: 2rem
+  justify-content: center
+  padding: 0.5rem
+  width: 20rem
+
+  .buttonLogin
+    background-color: $white-color
+    border-radius: 20px 4px
+    box-shadow: 0 5px #666
+    cursor: pointer;
+    height: 1.6rem
+    outline: none;
+    width: 5.6rem
+
+    .buttonLogin::active
+      background-color: $secondary-bg
+      // cursor: pointer
+      box-shadow: 0 5px #666
+      transform: translateY(4px)

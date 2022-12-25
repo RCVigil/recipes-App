@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './Sass/index.sass';
 import { Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import Foods from './pages/Foods';
@@ -12,13 +12,9 @@ import DrinkDetails from './pages/DrinkDetails';
 import RecipeInProgress from './pages/RecipeInProgress';
 
 function App() {
-  // useEffect(() => {
-  //   localStorage.setItem('doneRecipes', JSON.stringify([]));
-  //   localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-  // }, []);
   return (
-    <div className="meals">
-      <span className="logo">TRYBE</span>
+    <div className="meals h-full w-full">
+      <span className="logo">RECIPES APP</span>
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route exact path="/foods" component={ Foods } />
