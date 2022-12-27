@@ -45,18 +45,22 @@ export default function Recipes() {
           ? (
 
             <div
+              className="divRecipesFood"
               data-testid={ `${index}-recipe-card` }
               key={ index }
             >
               <Link
+                className="linkRecipes"
                 to={ `/drinks/${elem.idDrink}` }
               >
                 <img
+                  className="imgRecipes"
                   data-testid={ `${index}-card-img` }
                   src={ elem.strDrinkThumb }
                   alt=""
                 />
                 <p
+                  className="pRecipes"
                   data-testid={ `${index}-card-name` }
                 >
                   {elem.strDrink}

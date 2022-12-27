@@ -1,0 +1,83 @@
+@import '../../Sass/_variables'
+
+.divFullFavorR
+  align-content: center
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+  gap: 6rem
+  justify-content: space-evenly
+  margin: 2rem auto
+  padding: 1rem
+  height: auto
+  width: auto
+
+  .butFavorR
+    background-color: $hover-inputs
+    border-color: $secondary-bg
+    border-radius: 15px
+    cursor: pointer
+    height: 2rem
+    margin: 0 5rem
+    width: 6rem
+
+  .butFavorR:hover
+    background-color: $secondary-bg
+
+.divCardFavor
+  align-content: center
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap
+  justify-content: space-evenly
+  margin: 2rem auto
+  padding: 1rem
+  height: 15rem
+  overflow: hidden
+  width: 10rem
+
+  .imgFavor
+    align-self: center
+    border-radius: 100px
+    height: 5rem
+    margin: auto
+    order: 0
+    width: 5rem
+
+  .pCardFavName
+    align-content: center
+    align-self: center
+    display: flex
+    height: auto
+    justify-content: center
+    order: 1
+    text-align: center
+    width: 100%
+
+  .pCardFavType
+    align-self: center
+    font-size: medium
+    height: 1.5rem
+    margin: 0.5rem
+    order: 2
+    text-align: center
+    text-overflow: hidden
+    width: 100%
+
+  .iconHeartShare
+    align-content: center
+    display: flex
+    flex-direction: row
+    justify-content: space-evenly
+    order: 3
+    width: 100%
+
+    .inpShareIcon
+      align-self: center
+      height: 1.5rem
+      width: 30%
+
+    .inpBHeart
+      align-self: center
+      height: 1.5rem
+      width: 30%

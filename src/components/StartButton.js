@@ -1,15 +1,11 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import receitasContext from '../Context/ReceitasContext';
+import '../pages/Pages.styles/RecipsDetails.sass';
 
 function StartButton() {
   const { recipeDetail } = useContext(receitasContext);
   const history = useHistory();
-  const style = {
-    position: 'fixed',
-    bottom: '0px',
-    left: '200px',
-  };
   const { pathname } = history.location;
   const splited = pathname.split('/');
 
@@ -43,9 +39,9 @@ function StartButton() {
 
   return (
     <button
+      className="btnStartAndCont"
       type="button"
       data-testid="start-recipe-btn"
-      style={ style }
       onClick={ () => (
         history.push(`/${splited[1]}/${recipeDetail[caminho][0][selectId]}/in-progress`)
       ) }

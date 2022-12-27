@@ -1,0 +1,158 @@
+@import '../../Sass/_variables'
+
+.divFullRDetails
+  align-content: center
+  align-items: center
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap
+  justify-content: space-evenly
+  margin-top: 2rem
+  overflow: hidden
+  padding: 1rem
+  height: auto
+  width: 55rem
+
+  .headerRecipeDet
+    align-content: center
+    align-items: center
+    display: flex
+    flex-direction: row
+    height: 15rem
+    justify-content: center
+    overflow: hidden
+    padding: 2rem 0 3rem 0
+    width: 100%
+
+    .imgRecipeDet
+      align-self: center
+      border-radius: 50px
+      margin: 1rem
+      height: auto
+      width: 15rem
+
+    .h2H4RecipeDet
+      align-content: center
+      align-items: center
+      display: flex
+      flex-direction: column
+      justify-content: center
+      width: 50%
+
+      h2
+        font-size: 3rem
+
+      h4
+        font-size: 1.2rem
+
+  .ulIngredRecipeDet
+    align-content: center
+    align-items: center
+    display: flex
+    flex-direction: column
+    flex-wrap: wrap
+    gap: 0.5rem
+    height: 30rem
+    margin: 0 5rem
+    padding-top: 2rem
+    width: 40rem
+
+    .liIngredRecipeDet
+      align-self: center
+      height: 1.8rem
+      list-style-type: none
+      margin: 0.1rem
+      overflow: hidden
+      width: 50%
+
+      .liInterior
+        align-items: center
+        display: flex
+        height: 100%
+        flex-direction: row
+
+        .iconLiIngredient
+          align-self: center
+          margin: 0.2rem 1rem
+
+        .h2InteriorLi
+          font-family: serif
+          font-size: 1.1rem
+          letter-spacing: 1.3px
+
+  .pRecipeDet
+    height: auto
+    font-size: 1.2rem
+    text-indent: 3rem
+    padding: 3rem 1rem
+    text-align: justify
+    width: 90%
+
+  .iFrameRecipeDet
+    height: 15rem
+    width: auto
+
+  .carroselOthersBut
+    align-content: center
+    align-items: center
+    display: flex
+    height: 12rem
+    justify-content: space-around
+    margin: 2rem
+    width: 100%
+
+  .buttonStShCo
+    align-content: center
+    align-items: center
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    height: 10rem
+    overflow: hidden
+    width: 15%
+
+    .btnStartAndCont
+      align-self: center
+      background-color: $hover-inputs
+      border-color: $secondary-bg
+      border-radius: 15px
+      color: $black
+      cursor: pointer
+      font-size: 0.8rem
+      height: 3rem
+      margin-top: 1rem
+      text-align: center
+      width: 5rem
+
+    .btnStartAndCont:hover
+      background-color: $secondary-bg
+
+    .buttonsFavComp
+      align-content: flex-end
+      align-items: center
+      display: flex
+      flex-wrap: wrap
+      height: auto
+      justify-content: space-evenly
+      margin-top: 0.1rem
+      width: 7rem
+
+  .carrossel
+    display: flex
+    max-height: 11rem
+    max-width: 22rem
+    overflow-x: auto
+
+    .carrosselItem
+      display: flex
+      flex-direction: column
+      height: auto
+      margin-right: 5.7rem
+      margin-left: 0.7rem
+      text-align: center
+      width: 7rem
+
+      .carrosselimg
+        border-radius: 100px
+        height: auto
+        width: auto

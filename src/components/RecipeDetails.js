@@ -7,6 +7,8 @@ import StartButton from './StartButton';
 import heartClick from '../pages/funcs/heartClick';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../pages/Pages.styles/RecipsDetails.sass';
+import Foods from './Foods';
 
 const RecipeDetails = () => {
   const { recipeDetail, getMeals, getDrinks, recipes } = useContext(receitasContext);
@@ -16,10 +18,6 @@ const RecipeDetails = () => {
   const numCarros = 6;
   const [share, setShare] = useState(false);
   const [fav, setFav] = useState(false);
-  const style = {
-    margin: '0,0,20px,0',
-    padding: '30px',
-  };
 
   const ingredient = () => {
     if (splited[1] === 'foods') {
@@ -101,62 +99,82 @@ const RecipeDetails = () => {
   return (
     <div>
       {splited[1] === 'foods' ? (
-        <div>
-          <img
-            data-testid="recipe-photo"
-            src={ recipeDetail.meals[0].strMealThumb }
-            width="200px"
-            alt=""
-          />
-          <h2 data-testid="recipe-title">{recipeDetail.meals[0].strMeal}</h2>
-          <h4 data-testid="recipe-category">{recipeDetail.meals[0].strCategory}</h4>
-          <ul>
-            {ingredientes.map((a, i) => (
-              <li key={ i } data-testid={ `${i}-ingredient-name-and-measure` }>
-                {`${a} ${medidas[i]}`}
-              </li>))}
-          </ul>
-          <p data-testid="instructions">{recipeDetail.meals[0].strInstructions}</p>
-          <iframe
-            src={ recipeDetail.meals[0].strYoutube }
-            title="video"
-            data-testid="video"
-          />
-          {recipes.drinks && (
-            <div className="carrossel">
-              {recipes.drinks
-                .filter((a, i) => i < numCarros)
-                .map((el, ind) => (
-                  <div
-                    className="carrosselItem"
-                    data-testid={ `${ind}-recomendation-card` }
-                    key={ ind }
-                  >
-                    <img className="carrosselimg" src={ el.strDrinkThumb } alt="" />
-                    <p data-testid={ `${ind}-recomendation-title` }>{el.strDrink}</p>
-                  </div>))}
-            </div>)}
-          { localStorage.getItem('doneRecipes') !== null
-            ? !(JSON.parse(localStorage.getItem('doneRecipes'))
-              .some((a) => a.id === recipeDetail.meals[0].idMeal))
-          && (<StartButton />) : <StartButton />}
-          <button
-            type="button"
-            data-testid="share-btn"
-            onClick={ shareClick }
-            style={ style }
-          >
-            Compartilhar
-          </button>
-          <input
-            type="image"
-            alt=""
-            data-testid="favorite-btn"
-            src={ fav ? blackHeartIcon : whiteHeartIcon }
-            onClick={ () => heartClick(recipeDetail, splited, fav, setFav) }
-          />
-          { share && <p>Link copied!</p> }
-        </div>
+        <Foods />
+        // <div className="divFullRDetails">
+        //   <div className="headerRecipeDet">
+        //     <img
+        //       className="imgRecipeDet"
+        //       data-testid="recipe-photo"
+        //       src={ recipeDetail.meals[0].strMealThumb }
+        //       alt={ `Imagem da receita ${recipeDetail.meals[0].strMeal}` }
+        //     />
+        //     <div className="h2H4RecipeDet">
+        //       <h2 data-testid="recipe-title">{recipeDetail.meals[0].strMeal}</h2>
+        //       <h4 data-testid="recipe-category">
+        //         {recipeDetail.meals[0].strCategory}
+        //       </h4>
+        //     </div>
+        //   </div>
+        //   <ul className="ulIngredRecipeDet">
+        //     {ingredientes.map((a, i) => (
+        //       <li
+        //         className="liIngredRecipeDet"
+        //         key={ i }
+        //         data-testid={ `${i}-ingredient-name-and-measure` }
+        //       >
+        //         <AiFillCaretRight className='iconLiIngredient'/>
+        //         {`${a} ${medidas[i]}`}
+        //       </li>))}
+        //   </ul>
+        //   <p
+        //     className="pRecipeDet"
+        //     data-testid="instructions"
+        //   >
+        //     {recipeDetail.meals[0].strInstructions}
+        //   </p>
+        //   <iframe
+        //     width="560"
+        //     height="315"
+        //     className="iFrameRecipeDet"
+        //     src={ recipeDetail.meals[0].strYoutube }
+        //     title="YouTube video player"
+        //     data-testid="video"
+        //   />
+        //   {/* console.log({recipeDetail.meals[0].strYoutube}); */}
+        //   {recipes.drinks && (
+        //     <div className="carrossel">
+        //       {recipes.drinks
+        //         .filter((a, i) => i < numCarros)
+        //         .map((el, ind) => (
+        //           <div
+        //             className="carrosselItem"
+        //             data-testid={ `${ind}-recomendation-card` }
+        //             key={ ind }
+        //           >
+        //             <img className="carrosselimg" src={ el.strDrinkThumb } alt="" />
+        //             <p data-testid={ `${ind}-recomendation-title` }>{el.strDrink}</p>
+        //           </div>))}
+        //     </div>)}
+        //   { localStorage.getItem('doneRecipes') !== null
+        //     ? !(JSON.parse(localStorage.getItem('doneRecipes'))
+        //       .some((a) => a.id === recipeDetail.meals[0].idMeal))
+        //   && (<StartButton />) : <StartButton />}
+        //   <button
+        //     type="button"
+        //     data-testid="share-btn"
+        //     onClick={ shareClick }
+        //   >
+        //     Compartilhar
+        //   </button>
+        //   <input
+        //     type="image"
+        //     alt=""
+        //     data-testid="favorite-btn"
+        //     src={ fav ? blackHeartIcon : whiteHeartIcon }
+        //     onClick={ () => heartClick(recipeDetail, splited, fav, setFav) }
+        //   />
+        //   { share && <p>Link copied!</p> }
+        // </div>
       ) : (
         <div>
           <img
@@ -202,7 +220,6 @@ const RecipeDetails = () => {
             type="button"
             data-testid="share-btn"
             onClick={ shareClick }
-            style={ style }
           >
             Compartilhar
           </button>
