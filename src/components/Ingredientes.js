@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { ImArrowRight2 } from 'react-icons/im';
 import receitasContext from '../Context/ReceitasContext';
+import '../pages/Pages.styles/RecipeInProg.sass';
 
 function Ingredientes() {
   const { recipeDetail, setIngredientsRec, setLocBase } = useContext(receitasContext);
@@ -134,16 +136,26 @@ function Ingredientes() {
   }, []);
 
   return (
-    <ul>
+    <ul className='ulIngrediente'>
       {ingredientes.map((a, i) => (
-        <li key={ i } data-testid={ `${i}-ingredient-step` }>
-          {`${a} ${medidas[i]}`}
-          <input
-            type="checkbox"
-            name="checked"
-            onChange={ (ev) => handleCheck(ev, a) }
-            checked={ checked(a) }
-          />
+        <li
+          key={ i }
+          className="liIngredientes"
+          data-testid={ `${i}-ingredient-step` }
+        >
+          <ImArrowRight2 className='imReactIcon'/>
+
+          <div
+            className="divFullIngredientes"
+            >
+            {`${a} ${medidas[i]}`}
+            <input
+              type="checkbox"
+              name="checked"
+              onChange={ (ev) => handleCheck(ev, a) }
+              checked={ checked(a) }
+            />
+          </div>
         </li>
       ))}
     </ul>

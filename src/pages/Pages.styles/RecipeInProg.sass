@@ -1,0 +1,138 @@
+@import '../../Sass/_variables'
+
+.divRecInProg
+  align-content: center
+  align-items: center
+  display: flex
+  flex-direction: column
+  margin: 3rem 0
+  overflow: hidden
+  padding: 1rem
+
+  .h1HeaderRecipProg
+    font-size: 2.8rem
+    text-align: center
+
+  .divRecipeDetInProg
+    display: flex
+    flex-direction: column
+
+    .divHeaderRecipInProgress
+      align-content: center
+      align-items: center
+      display: flex
+      flex-wrap: wrap
+      height: 17rem
+      justify-content: center
+
+      .imgRecipInProg
+        border-radius: 100px
+        height: 15rem
+
+      .h2H4HeaderRecInProg
+        align-content: center
+        align-items: center
+        display: flex
+        flex-direction: column
+        flex-wrap: wrap
+        width: 50%
+
+        .h2HeaderRecInProg
+          height: 50%
+          font-family: serif
+          font-size: 2.4rem
+          text-align: center
+          width: 100%
+
+        .h4HeaderRecInProg
+          height: 20%
+          font-size: 1rem
+          text-align: center
+          width: 100%
+
+    .instPrepRecipInProg
+      align-content: center
+      align-items: center
+      display: flex
+      flex-direction: column
+      height: auto
+      overflow: hidden
+
+      .ulIngrediente
+        align-content: center
+        align-items: center
+        display: flex
+        flex-direction: column
+        flex-wrap: wrap
+        gap: 0.5rem
+        height: auto
+        overflow: hidden
+        width: 90%
+
+        .liIngredientes
+          align-content: center
+          align-items: center
+          border: 1px solid $secondary-bg
+          border-radius: 10px
+          display: flex
+          justify-content: space-between
+          overflow: hidden
+          width: 49%
+
+          .divFullIngredientes
+            display: flex
+            font-size: 1rem
+            justify-content: space-between
+            list-style-type: none
+            margin-right: 1rem
+            width: 85%
+
+          .imReactIcon
+            padding-right: 1.5rem
+
+      .h5RecipeInProg
+        color: #292626
+        font-size: 1rem
+        height: auto
+        margin: 1rem
+        padding: 3rem 1rem
+        text-align: justify
+        text-indent: 3rem
+        width: 95%
+
+    .buttonRecInProgFooter
+      align-content: center
+      align-items: center
+      display: flex
+      flex-direction: row
+      gap: 1rem
+      height: 5rem
+      justify-content: space-evenly
+      overflow: hidden
+      width: 100%
+
+      .ButtonFinRecInProg
+        align-self: center
+        background-color: $hover-inputs
+        border-color: $secondary-bg
+        border-radius: 15px
+        color: $black
+        cursor: pointer
+        font-size: 0.8rem
+        height: 3rem
+        margin-top: 1rem
+        text-align: center
+        width: 5rem
+
+      .ButtonFinRecInProg:hover
+        background-color: $secondary-bg
+
+      .buttonsFavCompRecInProg
+        align-content: flex-end
+        align-items: center
+        display: flex
+        flex-wrap: wrap
+        height: 2rem
+        justify-content: space-evenly
+        margin-top: 0.1rem
+        width: auto
