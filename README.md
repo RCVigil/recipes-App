@@ -1,9 +1,7 @@
 # Recipes App
 
-> <a
->   href="https://recipes-app-n6kk-lp6bl8h28-rcvigil.vercel.app/"
-> >
->   App de Receitas
+> <a href="https://recipes-app-n6kk-lp6bl8h28-rcvigil.vercel.app/">
+>   Link para o App de Receitas
 > </ a>
 
 >
@@ -13,20 +11,13 @@
 >
 > Este é o mais completo dos projetos excutados na Trybe, foi o fechamento de Front-end
 >
-> <img
->   src="./images/imagesReadme/pageLogin.png"
->   alt="Página de login"
-> />
+> <img src="src/images/imagesReadme/pageLogin.png" alt="Página de login"/>
 
-## Utilizei o Sass para estiliza-lo
+### Utilizei o Sass para estiliza-lo
 
 >
-> <img
->   src="./images/imagesReadme/pageSelection.png"
->   alt="Págian de selção de receitas"
-> />
+> <img src="src/images/imagesReadme/pageSelection.png" alt="Págian de selção de receitas"/>
 >
-> 
 
 <!-- Olá, Tryber!
 
@@ -42,4 +33,3 @@ Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua cr
 - quais arquivos/pastas foram desenvolvidos pela Trybe.
 
 -->
-# recipesApp
